@@ -77,8 +77,8 @@ resource appService 'Microsoft.Web/sites@2023-12-01' = {
     httpsOnly: true
     siteConfig: {
       linuxFxVersion: 'PHP|8.2'
-      // Rewrite Apache document root to Bedrock's web/ directory
-      appCommandLine: 'cp /etc/apache2/sites-available/000-default.conf /tmp/default.conf && sed -i \'s|/home/site/wwwroot|/home/site/wwwroot/web|g\' /tmp/default.conf && cp /tmp/default.conf /etc/apache2/sites-available/000-default.conf && apache2ctl -D FOREGROUND'
+      // Custom nginx config sets document root to Bedrock's web/ directory
+      appCommandLine: 'cp /home/site/wwwroot/nginx.conf /etc/nginx/sites-available/default && service nginx reload'
       appSettings: [
         // Bedrock environment
         { name: 'WP_ENV', value: wpEnv }
