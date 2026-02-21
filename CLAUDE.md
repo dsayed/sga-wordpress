@@ -35,5 +35,5 @@ Public website for Saving Great Animals, a Seattle-based dog rescue.
 - **Cost**: ~$33/month (B1 App Service + B1s MySQL). Stop when not using.
 
 ## Git
-- Repo-local identity: dsayed (not bal-spec)
+- Repo-local identity: dsayed
 - Remote uses PAT in URL for auth
