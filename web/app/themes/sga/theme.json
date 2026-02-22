@@ -1,0 +1,135 @@
+{
+  "$schema": "https://schemas.wp.org/wp/6.7/theme.json",
+  "version": 3,
+  "settings": {
+    "color": {
+      "palette": [
+        { "slug": "base", "color": "#FBF8F4", "name": "Base" },
+        { "slug": "contrast", "color": "#2B3990", "name": "Contrast" },
+        { "slug": "accent-1", "color": "#E8772B", "name": "Accent" },
+        { "slug": "accent-2", "color": "#4B5563", "name": "Body Text" },
+        { "slug": "accent-3", "color": "#F3F0EC", "name": "Surface" },
+        { "slug": "accent-4", "color": "#1E2A6B", "name": "Dark Blue" },
+        { "slug": "accent-5", "color": "#D46820", "name": "Dark Orange" },
+        { "slug": "accent-6", "color": "#FFFFFF", "name": "White" }
+      ]
+    },
+    "typography": {
+      "fontFamilies": [
+        {
+          "fontFamily": "'DM Sans', sans-serif",
+          "slug": "body-font",
+          "name": "DM Sans",
+          "fontFace": [
+            {
+              "fontFamily": "DM Sans",
+              "fontWeight": "400",
+              "fontStyle": "normal",
+              "src": ["file:./assets/fonts/dm-sans/DMSans-Regular.woff2"]
+            },
+            {
+              "fontFamily": "DM Sans",
+              "fontWeight": "500",
+              "fontStyle": "normal",
+              "src": ["file:./assets/fonts/dm-sans/DMSans-Medium.woff2"]
+            },
+            {
+              "fontFamily": "DM Sans",
+              "fontWeight": "700",
+              "fontStyle": "normal",
+              "src": ["file:./assets/fonts/dm-sans/DMSans-Bold.woff2"]
+            }
+          ]
+        },
+        {
+          "fontFamily": "'Fraunces', serif",
+          "slug": "heading-font",
+          "name": "Fraunces",
+          "fontFace": [
+            {
+              "fontFamily": "Fraunces",
+              "fontWeight": "400",
+              "fontStyle": "normal",
+              "src": ["file:./assets/fonts/fraunces/Fraunces-Regular.woff2"]
+            },
+            {
+              "fontFamily": "Fraunces",
+              "fontWeight": "700",
+              "fontStyle": "normal",
+              "src": ["file:./assets/fonts/fraunces/Fraunces-Bold.woff2"]
+            },
+            {
+              "fontFamily": "Fraunces",
+              "fontWeight": "900",
+              "fontStyle": "normal",
+              "src": ["file:./assets/fonts/fraunces/Fraunces-Black.woff2"]
+            }
+          ]
+        }
+      ]
+    },
+    "layout": {
+      "contentSize": "1200px",
+      "wideSize": "1400px"
+    }
+  },
+  "styles": {
+    "color": {
+      "background": "var(--wp--preset--color--base)",
+      "text": "var(--wp--preset--color--accent-2)"
+    },
+    "typography": {
+      "fontFamily": "var(--wp--preset--font-family--body-font)",
+      "fontSize": "18px",
+      "lineHeight": "1.7"
+    },
+    "elements": {
+      "heading": {
+        "typography": {
+          "fontFamily": "var(--wp--preset--font-family--heading-font)"
+        },
+        "color": {
+          "text": "var(--wp--preset--color--contrast)"
+        }
+      },
+      "link": {
+        "color": {
+          "text": "var(--wp--preset--color--contrast)"
+        },
+        ":hover": {
+          "color": {
+            "text": "var(--wp--preset--color--accent-1)"
+          }
+        }
+      },
+      "button": {
+        "color": {
+          "background": "var(--wp--preset--color--accent-1)",
+          "text": "var(--wp--preset--color--accent-6)"
+        },
+        "border": {
+          "radius": "6px"
+        },
+        "typography": {
+          "fontFamily": "var(--wp--preset--font-family--body-font)",
+          "fontWeight": "700",
+          "fontSize": "16px"
+        },
+        ":hover": {
+          "color": {
+            "background": "var(--wp--preset--color--accent-5)"
+          }
+        }
+      }
+    },
+    "blocks": {
+      "core/navigation": {
+        "typography": {
+          "fontFamily": "var(--wp--preset--font-family--body-font)",
+          "fontSize": "16px",
+          "fontWeight": "500"
+        }
+      }
+    }
+  }
+}

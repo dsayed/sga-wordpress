@@ -32,11 +32,11 @@ fi
 
 # Activate theme
 echo "Activating theme..."
-$WP theme activate twentytwentyfive
+$WP theme activate sga
 
 # Activate plugins
 echo "Activating plugins..."
-$WP plugin activate gutenverse 2>/dev/null || true
+# (no plugins to activate yet)
 
 # Set basic options
 echo "Configuring site options..."

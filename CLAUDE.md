@@ -5,8 +5,7 @@ Public website for Saving Great Animals, a Seattle-based dog rescue.
 ## Project Context
 - **Bedrock** (Roots) — WordPress managed via Composer
 - **Docker Compose** — local dev environment
-- **Gutenverse** — FSE block library for the theme
-- **Target theme** — Veterna FSE (not yet purchased; using Twenty Twenty-Five as placeholder)
+- **Theme** — Twenty Twenty-Five child theme (SGA-branded; Veterna was evaluated and rejected due to low adoption and Gutenverse stability issues)
 - **Companion repo** — github.com/dsayed/sga-community (community app, docs, prototypes)
 
 ## Key Commands
