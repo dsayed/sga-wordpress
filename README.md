@@ -90,41 +90,36 @@ Changes to theme/plugin files take effect immediately — no container restart n
 ```mermaid
 flowchart TD
     subgraph local["YOUR MACHINE"]
-        subgraph bedrock["sga-wordpress/ (Bedrock project)"]
-            files["web/app/themes/ — theme files you edit
-web/app/plugins/ — Composer-managed
-web/app/mu-plugins/ — auto-loaded plugins
-web/wp/ — WordPress core (don't edit)
-composer.json — declares WP core + plugins
-.env — local database credentials"]
+        subgraph bedrock["sga-wordpress/ — Bedrock project"]
+            files["themes, plugins, mu-plugins, composer.json, .env"]
         end
         subgraph docker["Docker Compose"]
-            db["db\nMySQL 8.0\nport 3306"]
-            wp["wordpress\nPHP 8.2 + Apache\nport 8080"]
-            wpcli["wpcli\n(on demand)"]
+            db["db<br/>MySQL 8.0"]
+            wp["wordpress<br/>PHP 8.2 + Apache<br/>port 8080"]
+            wpcli["wpcli<br/>on demand"]
             wp -->|queries| db
         end
-        localurl["http://localhost:8080\nDEVELOPMENT banner (blue)"]
+        localurl["localhost:8080<br/>DEVELOPMENT banner — blue"]
         wp --> localurl
     end
 
     subgraph github["GITHUB"]
         repo["dsayed/sga-wordpress"]
-        actions["GitHub Actions\n1. Checkout code\n2. Setup PHP 8.2\n3. composer install --no-dev\n4. Deploy via publish profile"]
+        actions["GitHub Actions<br/>1. Checkout code<br/>2. Setup PHP 8.2<br/>3. composer install --no-dev<br/>4. Deploy via publish profile"]
         repo --> actions
     end
 
     subgraph azure["AZURE"]
-        appservice["App Service: sga-wordpress-staging\nPHP 8.2 + nginx\nCentral US, B1 Linux"]
-        mysql["MySQL Flexible Server\nmysql-sga-test\nWest US 3, Burstable B1s"]
+        appservice["App Service<br/>PHP 8.2 + nginx<br/>Central US, B1 Linux"]
+        mysql["MySQL Flexible Server<br/>West US 3, Burstable B1s"]
         appservice -->|queries| mysql
-        azureurl["https://sga-wordpress-staging.azurewebsites.net\nSTAGING banner (orange)"]
+        azureurl["sga-wordpress-staging.azurewebsites.net<br/>STAGING banner — orange"]
         appservice --> azureurl
-        settings["App Settings replace .env\nDB creds, WP salts, WP_ENV=staging\nInfrastructure: main.bicep"]
+        settings["App Settings replace .env<br/>DB creds, WP salts, WP_ENV=staging"]
     end
 
     local -->|"git push to main"| github
-    github -->|"deploys automatically (~2 min)"| azure
+    github -->|"deploys automatically ~2 min"| azure
 ```
 
 ### How the pieces fit together
