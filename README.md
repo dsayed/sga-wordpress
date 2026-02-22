@@ -107,6 +107,27 @@ web/
 
 Changes to theme/plugin files take effect immediately — no container restart needed.
 
+### Theme development
+
+The SGA child theme lives in `web/app/themes/sga/`. Changes take effect immediately.
+
+| File | Purpose |
+|---|---|
+| `theme.json` | Colors, fonts, spacing, layout — the entire brand system |
+| `functions.php` | Pattern registration, Events Calendar styling, mobile bar |
+| `parts/header.html` | Site header with 5-item nav + Donate button |
+| `parts/footer.html` | Site footer with contact, links, social |
+| `templates/front-page.html` | Homepage layout (hero + tiles + trust) |
+| `templates/page.html` | Generic page layout |
+| `patterns/*.php` | Reusable block patterns (hero, cards, CTA, etc.) |
+
+Custom functionality lives in `web/app/mu-plugins/`:
+
+| File | Purpose |
+|---|---|
+| `sga-foster-dogs.php` | Foster Dog CPT — admin form + `[foster_dogs]` shortcode |
+| `sga-rescuegroups/` | RescueGroups API — `[available_dogs]` and `[dog_count]` shortcodes |
+
 ## Architecture
 
 ```mermaid
