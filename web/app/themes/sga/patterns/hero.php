@@ -26,10 +26,13 @@
 <!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"},"style":{"spacing":{"blockGap":"16px"}}} -->
 <div class="wp-block-buttons">
 <!-- wp:button {"backgroundColor":"accent-1","textColor":"accent-6","style":{"typography":{"fontSize":"18px","fontWeight":"700"},"border":{"radius":"6px"},"spacing":{"padding":{"top":"16px","bottom":"16px","left":"32px","right":"32px"}}}} -->
-<div class="wp-block-button" style="font-size:18px;font-weight:700"><a class="wp-block-button__link has-accent-6-color has-accent-1-background-color has-text-color has-background wp-element-button" href="/adopt/" style="border-radius:6px;padding-top:16px;padding-right:32px;padding-bottom:16px;padding-left:32px">Meet Our Dogs</a></div>
+<div class="wp-block-button" style="font-size:18px;font-weight:700"><a class="wp-block-button__link has-accent-6-color has-accent-1-background-color has-text-color has-background wp-element-button" href="/adopt/" style="border-radius:6px;padding-top:16px;padding-right:32px;padding-bottom:16px;padding-left:32px">Adopt a Dog</a></div>
 <!-- /wp:button -->
-<!-- wp:button {"textColor":"accent-6","className":"is-style-outline","style":{"typography":{"fontSize":"18px","fontWeight":"700"},"border":{"radius":"6px","color":"#ffffff","width":"2px"},"spacing":{"padding":{"top":"16px","bottom":"16px","left":"32px","right":"32px"}}}} -->
-<div class="wp-block-button is-style-outline" style="font-size:18px;font-weight:700"><a class="wp-block-button__link has-accent-6-color has-text-color wp-element-button" href="/get-involved/" style="border-radius:6px;border-color:#ffffff;border-width:2px;padding-top:16px;padding-right:32px;padding-bottom:16px;padding-left:32px">How to Help</a></div>
+<!-- wp:button {"backgroundColor":"accent-1","textColor":"accent-6","style":{"typography":{"fontSize":"18px","fontWeight":"700"},"border":{"radius":"6px"},"spacing":{"padding":{"top":"16px","bottom":"16px","left":"32px","right":"32px"}}}} -->
+<div class="wp-block-button" style="font-size:18px;font-weight:700"><a class="wp-block-button__link has-accent-6-color has-accent-1-background-color has-text-color has-background wp-element-button" href="/foster/" style="border-radius:6px;padding-top:16px;padding-right:32px;padding-bottom:16px;padding-left:32px">Foster a Dog</a></div>
+<!-- /wp:button -->
+<!-- wp:button {"backgroundColor":"accent-1","textColor":"accent-6","style":{"typography":{"fontSize":"18px","fontWeight":"700"},"border":{"radius":"6px"},"spacing":{"padding":{"top":"16px","bottom":"16px","left":"32px","right":"32px"}}}} -->
+<div class="wp-block-button" style="font-size:18px;font-weight:700"><a class="wp-block-button__link has-accent-6-color has-accent-1-background-color has-text-color has-background wp-element-button" href="/get-involved/" style="border-radius:6px;padding-top:16px;padding-right:32px;padding-bottom:16px;padding-left:32px">How to Help</a></div>
 <!-- /wp:button -->
 </div>
 <!-- /wp:buttons -->
