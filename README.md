@@ -146,23 +146,17 @@ flowchart TD
         wp --> localurl
     end
 
-    subgraph github["GITHUB"]
-        repo["dsayed/sga-wordpress"]
-        actions["GitHub Actions<br/>1. Checkout code<br/>2. Setup PHP 8.2<br/>3. composer install --no-dev<br/>4. Deploy via publish profile"]
-        repo --> actions
+    subgraph railway["RAILWAY"]
+        rwp["WordPress<br/>PHP 8.2 + Apache<br/>from Dockerfile"]
+        rdb["MySQL 8.0<br/>Railway-managed"]
+        rwp -->|queries| rdb
+        railurl["sga-wordpress-production.up.railway.app<br/>STAGING banner — orange"]
+        rwp --> railurl
+        vol["Volume<br/>web/app/uploads/"]
+        envvars["Environment Variables<br/>DB creds, WP salts, WP_ENV=staging"]
     end
 
-    subgraph azure["AZURE"]
-        appservice["App Service<br/>PHP 8.2 + nginx<br/>Central US, B1 Linux"]
-        mysql["MySQL Flexible Server<br/>West US 3, Burstable B1s"]
-        appservice -->|queries| mysql
-        azureurl["sga-wordpress-staging.azurewebsites.net<br/>STAGING banner — orange"]
-        appservice --> azureurl
-        settings["App Settings replace .env<br/>DB creds, WP salts, WP_ENV=staging"]
-    end
-
-    local -->|"git push to main"| github
-    github -->|"deploys automatically ~2 min"| azure
+    local -->|"git push to main<br/>auto-deploy ~1-2 min"| rwp
 ```
 
 ### How the pieces fit together
@@ -171,43 +165,30 @@ flowchart TD
 
 **Docker Compose** runs the local development environment. It spins up a MySQL database and a PHP web server as isolated containers. Your project files are mounted into the WordPress container, so edits show up instantly without rebuilding. The `wpcli` container exists only to run administrative commands (install plugins, reset passwords, etc.) and exits immediately after each command.
 
-**GitHub Actions** handles continuous deployment. When you push to `main`, a workflow checks out the code, installs Composer dependencies (without dev packages), and deploys the result to Azure. The whole pipeline takes about 2 minutes. Authentication uses a publish profile stored as a GitHub secret — no Azure credentials in the repo.
+**Railway** hosts the staging site and handles continuous deployment. When you push to `main`, Railway auto-deploys by building the Dockerfile (which runs `composer install --no-dev` inside the image) and starting the container. The whole pipeline takes about 1-2 minutes. Database credentials and WordPress salts are stored as Railway environment variables, following the [twelve-factor app](https://12factor.net/config) principle of keeping config out of code. A `docker-entrypoint.sh` script generates `.htaccess` for pretty permalinks, configures Apache's port, and auto-installs WordPress on first boot.
 
-**Azure App Service** hosts the staging site. It runs PHP 8.2 on Linux with nginx (not Apache like local). A custom `nginx.conf` in the repo sets the document root to Bedrock's `web/` directory. Database credentials and WordPress salts are stored as App Settings (Azure's equivalent of environment variables), following the [twelve-factor app](https://12factor.net/config) principle of keeping config out of code.
+**Local and Railway are independent environments.** They have separate databases with separate content. The environment banner — blue for development, orange for staging — makes it obvious which environment you're looking at.
 
-**Local and Azure are independent environments.** They have separate databases with separate content. The environment banner — blue for development, orange for staging — makes it obvious which environment you're looking at.
+## Railway Staging
 
-## Azure Staging
-
-Staging site: https://sga-wordpress-staging.azurewebsites.net
-
-### First-time setup
-
-```bash
-# Install Azure CLI and login
-brew install azure-cli
-az login
-az account set --subscription b5c4e6b0-e93e-47b8-ab37-1197d84b0064
-
-# Create resource group and deploy infrastructure
-az group create --name rg-sga --location westus2
-./infrastructure/deploy.sh
-
-# Get publish profile and add as GitHub secret
-az webapp deployment list-publishing-profiles --name sga-wordpress-staging --resource-group rg-sga --xml
-# Copy output → GitHub repo → Settings → Secrets → AZURE_WEBAPP_PUBLISH_PROFILE
-```
+Staging site: https://sga-wordpress-production.up.railway.app
 
 ### Deploy
 
-Push to `main` — GitHub Actions builds and deploys automatically.
+Push to `main` — Railway auto-builds the Dockerfile and deploys (~1-2 min).
 
-### Save costs
+### First boot
 
-```bash
-./scripts/azure-stop.sh    # Stop resources (~$0/month when stopped)
-./scripts/azure-start.sh   # Start back up
-```
+The `docker-entrypoint.sh` auto-installs WordPress on the first container start:
+- Installs WordPress core, activates the SGA theme and Events Calendar plugin
+- Creates all pages (Adopt, Foster, Dogs Needing Fosters, etc.)
+- Creates editor accounts (Lily, Jacintha)
+- Sets timezone, permalinks, and site options
+
+### Admin access
+
+- **URL**: https://sga-wordpress-production.up.railway.app/wp/wp-admin/
+- **Admin password**: stored in Railway environment variables (`WP_ADMIN_PASSWORD`)
 
 ## Related
 
