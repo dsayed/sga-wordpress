@@ -20,7 +20,7 @@
 <!-- /wp:heading -->
 
 <!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"clamp(1.1rem, 2vw, 1.5rem)"},"color":{"text":"#dddddd"},"spacing":{"margin":{"top":"24px","bottom":"40px"}}}} -->
-<p class="has-text-align-center" style="color:#dddddd;font-size:clamp(1.1rem, 2vw, 1.5rem);margin-top:24px;margin-bottom:40px">SGA fosters save 300+ dogs a year — and we need your help</p>
+<p class="has-text-align-center" style="color:#ffffff;font-size:clamp(1.1rem, 2vw, 1.5rem);margin-top:24px;margin-bottom:40px">SGA fosters save 300+ dogs a year — and we need your help</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"}} -->

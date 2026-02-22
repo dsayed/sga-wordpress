@@ -25,8 +25,8 @@ echo "=== Populating Page Content ===\n";
 
 // ─── ABOUT ───────────────────────────────────────────────────
 sga_update_page('about', '
-<!-- wp:cover {"dimRatio":0,"overlayColor":"contrast","isDark":true,"style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60","left":"24px","right":"24px"}},"dimensions":{"minHeight":"300px"}},"layout":{"type":"constrained"}} -->
-<div class="wp-block-cover is-dark" style="padding-top:var(--wp--preset--spacing--60);padding-right:24px;padding-bottom:var(--wp--preset--spacing--60);padding-left:24px;min-height:300px"><span aria-hidden="true" class="wp-block-cover__background has-contrast-background-color has-background-dim-0 has-background-dim"></span><div class="wp-block-cover__inner-container">
+<!-- wp:cover {"dimRatio":100,"overlayColor":"contrast","isDark":true,"style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60","left":"24px","right":"24px"}},"dimensions":{"minHeight":"300px"}},"layout":{"type":"constrained"}} -->
+<div class="wp-block-cover is-dark" style="padding-top:var(--wp--preset--spacing--60);padding-right:24px;padding-bottom:var(--wp--preset--spacing--60);padding-left:24px;min-height:300px"><span aria-hidden="true" class="wp-block-cover__background has-contrast-background-color has-background-dim-100 has-background-dim"></span><div class="wp-block-cover__inner-container">
 <!-- wp:heading {"textAlign":"center","level":1,"style":{"typography":{"fontSize":"clamp(2rem, 4vw, 3.5rem)"},"elements":{"link":{"color":{"text":"var:preset|color|accent-6"}}}},"textColor":"accent-6"} -->
 <h1 class="wp-block-heading has-text-align-center has-accent-6-color has-text-color has-link-color" style="font-size:clamp(2rem, 4vw, 3.5rem)">About Saving Great Animals</h1>
 <!-- /wp:heading -->
@@ -200,8 +200,8 @@ sga_update_page('foster', '
 
 // ─── GET INVOLVED ────────────────────────────────────────────
 sga_update_page('get-involved', '
-<!-- wp:cover {"dimRatio":0,"overlayColor":"contrast","isDark":true,"style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60","left":"24px","right":"24px"}},"dimensions":{"minHeight":"300px"}},"layout":{"type":"constrained"}} -->
-<div class="wp-block-cover is-dark" style="padding-top:var(--wp--preset--spacing--60);padding-right:24px;padding-bottom:var(--wp--preset--spacing--60);padding-left:24px;min-height:300px"><span aria-hidden="true" class="wp-block-cover__background has-contrast-background-color has-background-dim-0 has-background-dim"></span><div class="wp-block-cover__inner-container">
+<!-- wp:cover {"dimRatio":100,"overlayColor":"contrast","isDark":true,"style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60","left":"24px","right":"24px"}},"dimensions":{"minHeight":"300px"}},"layout":{"type":"constrained"}} -->
+<div class="wp-block-cover is-dark" style="padding-top:var(--wp--preset--spacing--60);padding-right:24px;padding-bottom:var(--wp--preset--spacing--60);padding-left:24px;min-height:300px"><span aria-hidden="true" class="wp-block-cover__background has-contrast-background-color has-background-dim-100 has-background-dim"></span><div class="wp-block-cover__inner-container">
 <!-- wp:heading {"textAlign":"center","level":1,"style":{"typography":{"fontSize":"clamp(2rem, 4vw, 3.5rem)"},"elements":{"link":{"color":{"text":"var:preset|color|accent-6"}}}},"textColor":"accent-6"} -->
 <h1 class="wp-block-heading has-text-align-center has-accent-6-color has-text-color has-link-color" style="font-size:clamp(2rem, 4vw, 3.5rem)">Get Involved</h1>
 <!-- /wp:heading -->
@@ -337,8 +337,8 @@ sga_update_page('get-involved', '
 
 // ─── DONATE ──────────────────────────────────────────────────
 sga_update_page('donate', '
-<!-- wp:cover {"dimRatio":0,"overlayColor":"contrast","isDark":true,"style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60","left":"24px","right":"24px"}},"dimensions":{"minHeight":"300px"}},"layout":{"type":"constrained"}} -->
-<div class="wp-block-cover is-dark" style="padding-top:var(--wp--preset--spacing--60);padding-right:24px;padding-bottom:var(--wp--preset--spacing--60);padding-left:24px;min-height:300px"><span aria-hidden="true" class="wp-block-cover__background has-contrast-background-color has-background-dim-0 has-background-dim"></span><div class="wp-block-cover__inner-container">
+<!-- wp:cover {"dimRatio":100,"overlayColor":"contrast","isDark":true,"style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60","left":"24px","right":"24px"}},"dimensions":{"minHeight":"300px"}},"layout":{"type":"constrained"}} -->
+<div class="wp-block-cover is-dark" style="padding-top:var(--wp--preset--spacing--60);padding-right:24px;padding-bottom:var(--wp--preset--spacing--60);padding-left:24px;min-height:300px"><span aria-hidden="true" class="wp-block-cover__background has-contrast-background-color has-background-dim-100 has-background-dim"></span><div class="wp-block-cover__inner-container">
 <!-- wp:heading {"textAlign":"center","level":1,"style":{"typography":{"fontSize":"clamp(2rem, 4vw, 3.5rem)"},"elements":{"link":{"color":{"text":"var:preset|color|accent-6"}}}},"textColor":"accent-6"} -->
 <h1 class="wp-block-heading has-text-align-center has-accent-6-color has-text-color has-link-color" style="font-size:clamp(2rem, 4vw, 3.5rem)">Support Our Mission</h1>
 <!-- /wp:heading -->
@@ -436,8 +436,8 @@ sga_update_page('donate', '
 
 // ─── SURRENDER ───────────────────────────────────────────────
 sga_update_page('surrender', '
-<!-- wp:cover {"dimRatio":0,"overlayColor":"contrast","isDark":true,"style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60","left":"24px","right":"24px"}},"dimensions":{"minHeight":"300px"}},"layout":{"type":"constrained"}} -->
-<div class="wp-block-cover is-dark" style="padding-top:var(--wp--preset--spacing--60);padding-right:24px;padding-bottom:var(--wp--preset--spacing--60);padding-left:24px;min-height:300px"><span aria-hidden="true" class="wp-block-cover__background has-contrast-background-color has-background-dim-0 has-background-dim"></span><div class="wp-block-cover__inner-container">
+<!-- wp:cover {"dimRatio":100,"overlayColor":"contrast","isDark":true,"style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60","left":"24px","right":"24px"}},"dimensions":{"minHeight":"300px"}},"layout":{"type":"constrained"}} -->
+<div class="wp-block-cover is-dark" style="padding-top:var(--wp--preset--spacing--60);padding-right:24px;padding-bottom:var(--wp--preset--spacing--60);padding-left:24px;min-height:300px"><span aria-hidden="true" class="wp-block-cover__background has-contrast-background-color has-background-dim-100 has-background-dim"></span><div class="wp-block-cover__inner-container">
 <!-- wp:heading {"textAlign":"center","level":1,"style":{"typography":{"fontSize":"clamp(2rem, 4vw, 3.5rem)"},"elements":{"link":{"color":{"text":"var:preset|color|accent-6"}}}},"textColor":"accent-6"} -->
 <h1 class="wp-block-heading has-text-align-center has-accent-6-color has-text-color has-link-color" style="font-size:clamp(2rem, 4vw, 3.5rem)">Surrender a Dog</h1>
 <!-- /wp:heading -->
@@ -516,8 +516,8 @@ sga_update_page('surrender', '
 
 // ─── RESOURCES ───────────────────────────────────────────────
 sga_update_page('resources', '
-<!-- wp:cover {"dimRatio":0,"overlayColor":"contrast","isDark":true,"style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60","left":"24px","right":"24px"}},"dimensions":{"minHeight":"300px"}},"layout":{"type":"constrained"}} -->
-<div class="wp-block-cover is-dark" style="padding-top:var(--wp--preset--spacing--60);padding-right:24px;padding-bottom:var(--wp--preset--spacing--60);padding-left:24px;min-height:300px"><span aria-hidden="true" class="wp-block-cover__background has-contrast-background-color has-background-dim-0 has-background-dim"></span><div class="wp-block-cover__inner-container">
+<!-- wp:cover {"dimRatio":100,"overlayColor":"contrast","isDark":true,"style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60","left":"24px","right":"24px"}},"dimensions":{"minHeight":"300px"}},"layout":{"type":"constrained"}} -->
+<div class="wp-block-cover is-dark" style="padding-top:var(--wp--preset--spacing--60);padding-right:24px;padding-bottom:var(--wp--preset--spacing--60);padding-left:24px;min-height:300px"><span aria-hidden="true" class="wp-block-cover__background has-contrast-background-color has-background-dim-100 has-background-dim"></span><div class="wp-block-cover__inner-container">
 <!-- wp:heading {"textAlign":"center","level":1,"style":{"typography":{"fontSize":"clamp(2rem, 4vw, 3.5rem)"},"elements":{"link":{"color":{"text":"var:preset|color|accent-6"}}}},"textColor":"accent-6"} -->
 <h1 class="wp-block-heading has-text-align-center has-accent-6-color has-text-color has-link-color" style="font-size:clamp(2rem, 4vw, 3.5rem)">Resources</h1>
 <!-- /wp:heading -->
@@ -582,8 +582,8 @@ sga_update_page('resources', '
 // The Events Calendar plugin handles the event listing via its own template system.
 // We add a minimal page hero and let the plugin render events below.
 sga_update_page('events', '
-<!-- wp:cover {"dimRatio":0,"overlayColor":"contrast","isDark":true,"style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60","left":"24px","right":"24px"}},"dimensions":{"minHeight":"300px"}},"layout":{"type":"constrained"}} -->
-<div class="wp-block-cover is-dark" style="padding-top:var(--wp--preset--spacing--60);padding-right:24px;padding-bottom:var(--wp--preset--spacing--60);padding-left:24px;min-height:300px"><span aria-hidden="true" class="wp-block-cover__background has-contrast-background-color has-background-dim-0 has-background-dim"></span><div class="wp-block-cover__inner-container">
+<!-- wp:cover {"dimRatio":100,"overlayColor":"contrast","isDark":true,"style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60","left":"24px","right":"24px"}},"dimensions":{"minHeight":"300px"}},"layout":{"type":"constrained"}} -->
+<div class="wp-block-cover is-dark" style="padding-top:var(--wp--preset--spacing--60);padding-right:24px;padding-bottom:var(--wp--preset--spacing--60);padding-left:24px;min-height:300px"><span aria-hidden="true" class="wp-block-cover__background has-contrast-background-color has-background-dim-100 has-background-dim"></span><div class="wp-block-cover__inner-container">
 <!-- wp:heading {"textAlign":"center","level":1,"style":{"typography":{"fontSize":"clamp(2rem, 4vw, 3.5rem)"},"elements":{"link":{"color":{"text":"var:preset|color|accent-6"}}}},"textColor":"accent-6"} -->
 <h1 class="wp-block-heading has-text-align-center has-accent-6-color has-text-color has-link-color" style="font-size:clamp(2rem, 4vw, 3.5rem)">Events</h1>
 <!-- /wp:heading -->

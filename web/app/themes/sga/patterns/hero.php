@@ -20,19 +20,19 @@
 <!-- /wp:heading -->
 
 <!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"clamp(1.1rem, 2vw, 1.5rem)"},"color":{"text":"#dddddd"},"spacing":{"margin":{"top":"24px","bottom":"40px"}}}} -->
-<p class="has-text-align-center" style="color:#dddddd;font-size:clamp(1.1rem, 2vw, 1.5rem);margin-top:24px;margin-bottom:40px">Seattle's dog rescue — finding the right dog for the right home</p>
+<p class="has-text-align-center" style="color:#ffffff;font-size:clamp(1.1rem, 2vw, 1.5rem);margin-top:24px;margin-bottom:40px">Seattle's dog rescue — finding the right dog for the right home</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"},"style":{"spacing":{"blockGap":"16px"}}} -->
+<!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center","flexWrap":"wrap"},"style":{"spacing":{"blockGap":"12px"}}} -->
 <div class="wp-block-buttons">
-<!-- wp:button {"backgroundColor":"accent-1","textColor":"accent-6","style":{"typography":{"fontSize":"18px","fontWeight":"700"},"border":{"radius":"6px"},"spacing":{"padding":{"top":"16px","bottom":"16px","left":"32px","right":"32px"}}}} -->
-<div class="wp-block-button" style="font-size:18px;font-weight:700"><a class="wp-block-button__link has-accent-6-color has-accent-1-background-color has-text-color has-background wp-element-button" href="/adopt/" style="border-radius:6px;padding-top:16px;padding-right:32px;padding-bottom:16px;padding-left:32px">Adopt a Dog</a></div>
+<!-- wp:button {"backgroundColor":"accent-1","textColor":"accent-6","style":{"typography":{"fontSize":"clamp(15px, 2vw, 18px)","fontWeight":"700"},"border":{"radius":"6px"},"spacing":{"padding":{"top":"14px","bottom":"14px","left":"24px","right":"24px"}}}} -->
+<div class="wp-block-button" style="font-size:clamp(15px, 2vw, 18px);font-weight:700"><a class="wp-block-button__link has-accent-6-color has-accent-1-background-color has-text-color has-background wp-element-button" href="/adopt/" style="border-radius:6px;padding-top:14px;padding-right:24px;padding-bottom:14px;padding-left:24px">Adopt a Dog</a></div>
 <!-- /wp:button -->
-<!-- wp:button {"backgroundColor":"accent-1","textColor":"accent-6","style":{"typography":{"fontSize":"18px","fontWeight":"700"},"border":{"radius":"6px"},"spacing":{"padding":{"top":"16px","bottom":"16px","left":"32px","right":"32px"}}}} -->
-<div class="wp-block-button" style="font-size:18px;font-weight:700"><a class="wp-block-button__link has-accent-6-color has-accent-1-background-color has-text-color has-background wp-element-button" href="/foster/" style="border-radius:6px;padding-top:16px;padding-right:32px;padding-bottom:16px;padding-left:32px">Foster a Dog</a></div>
+<!-- wp:button {"backgroundColor":"accent-1","textColor":"accent-6","style":{"typography":{"fontSize":"clamp(15px, 2vw, 18px)","fontWeight":"700"},"border":{"radius":"6px"},"spacing":{"padding":{"top":"14px","bottom":"14px","left":"24px","right":"24px"}}}} -->
+<div class="wp-block-button" style="font-size:clamp(15px, 2vw, 18px);font-weight:700"><a class="wp-block-button__link has-accent-6-color has-accent-1-background-color has-text-color has-background wp-element-button" href="/foster/" style="border-radius:6px;padding-top:14px;padding-right:24px;padding-bottom:14px;padding-left:24px">Foster a Dog</a></div>
 <!-- /wp:button -->
-<!-- wp:button {"backgroundColor":"accent-1","textColor":"accent-6","style":{"typography":{"fontSize":"18px","fontWeight":"700"},"border":{"radius":"6px"},"spacing":{"padding":{"top":"16px","bottom":"16px","left":"32px","right":"32px"}}}} -->
-<div class="wp-block-button" style="font-size:18px;font-weight:700"><a class="wp-block-button__link has-accent-6-color has-accent-1-background-color has-text-color has-background wp-element-button" href="/get-involved/" style="border-radius:6px;padding-top:16px;padding-right:32px;padding-bottom:16px;padding-left:32px">How to Help</a></div>
+<!-- wp:button {"backgroundColor":"accent-1","textColor":"accent-6","style":{"typography":{"fontSize":"clamp(15px, 2vw, 18px)","fontWeight":"700"},"border":{"radius":"6px"},"spacing":{"padding":{"top":"14px","bottom":"14px","left":"24px","right":"24px"}}}} -->
+<div class="wp-block-button" style="font-size:clamp(15px, 2vw, 18px);font-weight:700"><a class="wp-block-button__link has-accent-6-color has-accent-1-background-color has-text-color has-background wp-element-button" href="/get-involved/" style="border-radius:6px;padding-top:14px;padding-right:24px;padding-bottom:14px;padding-left:24px">How to Help</a></div>
 <!-- /wp:button -->
 </div>
 <!-- /wp:buttons -->

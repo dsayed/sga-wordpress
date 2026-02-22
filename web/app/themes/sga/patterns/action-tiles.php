@@ -23,7 +23,7 @@
 <h3 class="wp-block-heading has-text-align-center" style="color:#ffffff;font-size:28px">Adopt</h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"align":"center","style":{"color":{"text":"#dddddd"},"typography":{"fontSize":"16px"}}} -->
-<p class="has-text-align-center" style="color:#dddddd;font-size:16px">Dogs waiting for their forever home</p>
+<p class="has-text-align-center" style="color:#ffffff;font-size:16px">Dogs waiting for their forever home</p>
 <!-- /wp:paragraph -->
 <!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"}} -->
 <div class="wp-block-buttons">
@@ -49,7 +49,7 @@
 <h3 class="wp-block-heading has-text-align-center" style="color:#ffffff;font-size:28px">Foster</h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"align":"center","style":{"color":{"text":"#dddddd"},"typography":{"fontSize":"16px"}}} -->
-<p class="has-text-align-center" style="color:#dddddd;font-size:16px">Open your home, change a life</p>
+<p class="has-text-align-center" style="color:#ffffff;font-size:16px">Open your home, change a life</p>
 <!-- /wp:paragraph -->
 <!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"}} -->
 <div class="wp-block-buttons">
@@ -75,7 +75,7 @@
 <h3 class="wp-block-heading has-text-align-center" style="color:#ffffff;font-size:28px">Get Involved</h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"align":"center","style":{"color":{"text":"#dddddd"},"typography":{"fontSize":"16px"}}} -->
-<p class="has-text-align-center" style="color:#dddddd;font-size:16px">Volunteer with us in Seattle</p>
+<p class="has-text-align-center" style="color:#ffffff;font-size:16px">Volunteer with us in Seattle</p>
 <!-- /wp:paragraph -->
 <!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"}} -->
 <div class="wp-block-buttons">

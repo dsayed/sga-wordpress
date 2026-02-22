@@ -104,9 +104,11 @@ add_action('wp_enqueue_scripts', function () {
                 bottom: 0;
                 left: 0;
                 right: 0;
-                background: #FBF8F4;
-                border-top: 1px solid #ddd;
-                padding: 12px 16px;
+                background: rgba(251, 248, 244, 0.92);
+                backdrop-filter: blur(8px);
+                -webkit-backdrop-filter: blur(8px);
+                border-top: 1px solid rgba(0,0,0,0.1);
+                padding: 8px 12px;
                 z-index: 9999;
                 display: flex;
                 gap: 8px;
@@ -114,12 +116,12 @@ add_action('wp_enqueue_scripts', function () {
             .sga-mobile-donate a {
                 flex: 1;
                 text-align: center;
-                padding: 14px;
+                padding: 10px;
                 border-radius: 8px;
                 font-weight: 700;
-                font-size: 16px;
+                font-size: 14px;
                 text-decoration: none;
-                min-height: 48px;
+                min-height: 44px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -132,8 +134,7 @@ add_action('wp_enqueue_scripts', function () {
                 background: #E8772B;
                 color: #fff;
             }
-            /* Add bottom padding to body so sticky bar does not cover content */
-            body { padding-bottom: 72px; }
+            body { padding-bottom: 60px; }
         }
         @media (min-width: 769px) {
             .sga-mobile-donate { display: none; }
