@@ -10,7 +10,6 @@ $dogs = new WP_Query([
     'post_type'      => 'foster_dog',
     'posts_per_page' => 3,
     'post_status'    => 'publish',
-    'meta_key'       => 'foster_dog_urgency',
     'meta_query'     => [
         [
             'key'     => 'foster_dog_urgency',
@@ -92,7 +91,7 @@ $headline = $count === 1
         <div style="padding:16px;">
             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
                 <h3 style="margin:0;font-size:20px;color:#2B3990;font-family:var(--wp--preset--font-family--heading-font, 'Fraunces', serif);"><?php echo esc_html($dog['title']); ?></h3>
-                <span style="background:<?php echo $badge_color; ?>;color:#fff;padding:3px 10px;border-radius:20px;font-size:12px;font-weight:700;white-space:nowrap;"><?php echo esc_html($badge_text); ?></span>
+                <span style="background:<?php echo esc_attr($badge_color); ?>;color:#fff;padding:3px 10px;border-radius:20px;font-size:12px;font-weight:700;white-space:nowrap;"><?php echo esc_html($badge_text); ?></span>
             </div>
             <?php if ($details) : ?>
                 <p style="margin:0;color:#4B5563;font-size:15px;"><?php echo esc_html(implode(' · ', $details)); ?></p>
