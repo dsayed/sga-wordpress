@@ -33,5 +33,11 @@ cat > /etc/apache2/sites-available/000-default.conf << VHOST
 </VirtualHost>
 VHOST
 
+# Ensure only mpm_prefork is loaded (required for mod_php)
+# Railway's container runtime can re-enable mpm_event; force prefork at startup
+rm -f /etc/apache2/mods-enabled/mpm_event.* /etc/apache2/mods-enabled/mpm_worker.*
+ln -sf /etc/apache2/mods-available/mpm_prefork.conf /etc/apache2/mods-enabled/ 2>/dev/null || true
+ln -sf /etc/apache2/mods-available/mpm_prefork.load /etc/apache2/mods-enabled/ 2>/dev/null || true
+
 # Hand off to Apache
 exec apache2-foreground
