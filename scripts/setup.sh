@@ -36,7 +36,7 @@ $WP theme activate sga
 
 # Activate plugins
 echo "Activating plugins..."
-# (no plugins to activate yet)
+$WP plugin activate the-events-calendar
 
 # Set basic options
 echo "Configuring site options..."
@@ -50,6 +50,32 @@ echo "Cleaning default content..."
 $WP post delete 1 --force 2>/dev/null || true
 $WP post delete 2 --force 2>/dev/null || true
 $WP comment delete 1 --force 2>/dev/null || true
+
+# Create main pages
+echo "Creating pages..."
+$WP post create --post_type=page --post_title='Adopt' --post_name='adopt' --post_status=publish --post_content='[available_dogs]'
+$WP post create --post_type=page --post_title='Foster' --post_name='foster' --post_status=publish
+$WP post create --post_type=page --post_title='Dogs Needing Fosters' --post_name='dogs-needing-fosters' --post_status=publish --post_content='[foster_dogs]'
+$WP post create --post_type=page --post_title='Get Involved' --post_name='get-involved' --post_status=publish
+$WP post create --post_type=page --post_title='About' --post_name='about' --post_status=publish
+$WP post create --post_type=page --post_title='Donate' --post_name='donate' --post_status=publish
+$WP post create --post_type=page --post_title='Surrender' --post_name='surrender' --post_status=publish
+$WP post create --post_type=page --post_title='Resources' --post_name='resources' --post_status=publish
+
+# Set homepage to use front-page.html template (no static page needed)
+$WP option update show_on_front 'posts'
+
+echo "Pages created. Use the block editor to add SGA patterns to each page."
+
+# Create Editor-role accounts for content editors.
+# Editors can create/edit pages, posts, and custom post types (foster dogs),
+# but CANNOT access the Site Editor or change theme settings.
+# This keeps git as the source of truth for templates and styles.
+echo "Creating editor accounts..."
+$WP user create lily lily@savinggreatanimals.org --role=editor --display_name='Lily Piecora' 2>/dev/null || true
+$WP user create jacintha jacintha@savinggreatanimals.org --role=editor --display_name='Jacintha Sayed' 2>/dev/null || true
+
+echo "Editor accounts created (lily, jacintha). Set passwords in wp-admin."
 
 echo "=== Setup complete ==="
 echo "Site: http://localhost:8080"

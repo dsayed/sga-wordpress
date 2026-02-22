@@ -23,3 +23,130 @@ add_action('init', function () {
 add_action('admin_menu', function () {
     remove_submenu_page('themes.php', 'site-editor.php');
 });
+
+/**
+ * Style The Events Calendar to match SGA theme.
+ */
+add_action('wp_enqueue_scripts', function () {
+    if (!class_exists('Tribe__Events__Main')) return;
+
+    wp_register_style('sga-events-calendar', false);
+    wp_enqueue_style('sga-events-calendar');
+    wp_add_inline_style('sga-events-calendar', '
+        .tribe-events .tribe-events-calendar-list__event-title a {
+            color: #2B3990;
+            font-family: var(--wp--preset--font-family--heading-font, "Fraunces", serif);
+        }
+        .tribe-events .tribe-events-calendar-list__event-title a:hover {
+            color: #E8772B;
+        }
+        .tribe-events .tribe-events-c-nav__prev,
+        .tribe-events .tribe-events-c-nav__next {
+            color: #2B3990;
+        }
+        .tribe-common .tribe-common-c-btn-border,
+        .tribe-common a.tribe-common-c-btn-border {
+            border-color: #2B3990;
+            color: #2B3990;
+        }
+        .tribe-common .tribe-common-c-btn-border:hover {
+            background: #2B3990;
+            color: #fff;
+        }
+    ');
+});
+
+/**
+ * Mobile refinements and accessibility improvements.
+ */
+add_action('wp_enqueue_scripts', function () {
+    wp_register_style('sga-mobile', false);
+    wp_enqueue_style('sga-mobile');
+    wp_add_inline_style('sga-mobile', '
+        /* Ensure minimum touch target size (WCAG 2.5.8) */
+        .wp-block-navigation-item a,
+        .wp-block-social-link a,
+        .wp-block-button__link {
+            min-height: 48px;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        /* Focus styles for keyboard navigation */
+        a:focus-visible,
+        button:focus-visible,
+        input:focus-visible,
+        select:focus-visible,
+        textarea:focus-visible {
+            outline: 3px solid #E8772B;
+            outline-offset: 2px;
+        }
+
+        /* Skip to content link */
+        .skip-to-content {
+            position: absolute;
+            left: -9999px;
+            top: 0;
+            z-index: 9999;
+            background: #2B3990;
+            color: #fff;
+            padding: 12px 24px;
+            font-size: 16px;
+        }
+        .skip-to-content:focus {
+            left: 0;
+        }
+
+        /* Mobile: sticky bottom donate bar */
+        @media (max-width: 768px) {
+            .sga-mobile-donate {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background: #FBF8F4;
+                border-top: 1px solid #ddd;
+                padding: 12px 16px;
+                z-index: 9999;
+                display: flex;
+                gap: 8px;
+            }
+            .sga-mobile-donate a {
+                flex: 1;
+                text-align: center;
+                padding: 14px;
+                border-radius: 8px;
+                font-weight: 700;
+                font-size: 16px;
+                text-decoration: none;
+                min-height: 48px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .sga-mobile-donate .btn-adopt {
+                background: #2B3990;
+                color: #fff;
+            }
+            .sga-mobile-donate .btn-donate {
+                background: #E8772B;
+                color: #fff;
+            }
+            /* Add bottom padding to body so sticky bar does not cover content */
+            body { padding-bottom: 72px; }
+        }
+        @media (min-width: 769px) {
+            .sga-mobile-donate { display: none; }
+        }
+    ');
+});
+
+/**
+ * Add mobile sticky bottom bar for Adopt + Donate.
+ */
+add_action('wp_footer', function () {
+    echo '<div class="sga-mobile-donate">';
+    echo '<a href="/adopt/" class="btn-adopt">Adopt</a>';
+    echo '<a href="/donate/" class="btn-donate">Donate</a>';
+    echo '</div>';
+});
