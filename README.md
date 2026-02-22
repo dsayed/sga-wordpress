@@ -2,9 +2,11 @@
 
 Public website for [Saving Great Animals](https://savinggreatanimals.org), a dog rescue in Seattle.
 
-## Quick Start
+## Quick Start (first time only)
 
-Prerequisites: [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+1. Install [Docker Desktop](https://www.docker.com/products/docker-desktop/) if you don't have it
+2. Open Docker Desktop and wait for it to finish starting (whale icon in menu bar stops animating)
+3. Run these commands in Terminal:
 
 ```bash
 git clone https://github.com/dsayed/sga-wordpress.git
@@ -14,14 +16,38 @@ docker compose up -d --build
 docker compose run --rm -v $(pwd)/scripts:/scripts --entrypoint sh wpcli /scripts/setup.sh
 ```
 
-- Site: http://localhost:8080
-- Admin: http://localhost:8080/wp/wp-admin (admin / admin)
+4. Open http://localhost:8080 — you should see the site with a blue DEVELOPMENT banner
+5. Admin: http://localhost:8080/wp/wp-admin (username: **admin**, password: **admin**)
 
 ## Local Development
 
-### What the setup does
+### Starting your dev session
 
-`docker compose up -d --build` starts three containers:
+1. **Open Docker Desktop** (from Applications or Spotlight). Wait for it to finish starting.
+2. **Start the containers:**
+   ```bash
+   cd ~/repos/sga-wordpress
+   docker compose up -d
+   ```
+3. **Open** http://localhost:8080
+
+That's it. Your database and content are still there from last time.
+
+### Stopping your dev session
+
+When you're done working on the WordPress site:
+
+```bash
+docker compose down              # Stops containers, keeps your database
+```
+
+Then **quit Docker Desktop** (right-click the whale icon in the menu bar → Quit, or Cmd+Q). This frees up ~400-500MB of RAM. You only need Docker Desktop running when working on the WordPress site.
+
+> **Warning:** `docker compose down -v` (with `-v`) **deletes your database**. Only use this if you want a completely fresh start. Without `-v`, your content is safe.
+
+### What's running
+
+`docker compose up -d` starts three containers:
 
 | Container | Image | Purpose |
 |-----------|-------|---------|
@@ -29,22 +55,18 @@ docker compose run --rm -v $(pwd)/scripts:/scripts --entrypoint sh wpcli /script
 | **wordpress** | PHP 8.2 + Apache (custom Dockerfile) | Serves WordPress from Bedrock's `web/` directory |
 | **wpcli** | wordpress:cli | WP-CLI commands (runs on demand, not persistent) |
 
-The setup script (`scripts/setup.sh`) then installs WordPress with these defaults:
+The setup script (`scripts/setup.sh`) installs WordPress with these defaults:
 - Admin credentials: **admin / admin**
 - Site title: "Saving Great Animals"
-- Theme: Twenty Twenty-Five (placeholder until Veterna FSE is purchased)
-- Plugin: Gutenverse (FSE block library)
+- Theme: Twenty Twenty-Five
 - Timezone: America/Los_Angeles
 - Permalinks: `/%postname%/`
 
 A blue **DEVELOPMENT** banner appears at the top of both the site and admin dashboard.
 
-### Day-to-day commands
+### Viewing logs
 
 ```bash
-docker compose up -d             # Start containers
-docker compose down              # Stop containers (keeps database)
-docker compose down -v           # Stop and DELETE database
 docker compose logs wordpress    # View WordPress/Apache logs
 docker compose logs db           # View MySQL logs
 ```
