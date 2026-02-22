@@ -91,11 +91,8 @@ echo "Populating page content..."
 cat /var/www/html/scripts/populate-content.php | $WP eval-file -
 echo "Page content populated."
 
-# Populate foster dogs
-echo "Populating foster dogs..."
-/bin/sh /var/www/html/scripts/populate-fosters.sh
-
-# Import seed images into the media library
+# Import seed images BEFORE creating foster dogs so attachment slugs
+# don't collide (fosters and images share names like "binky", "aiden")
 echo "Importing seed images..."
 SEED_DIR="/var/www/html/web/app/uploads/seed"
 if [ -d "$SEED_DIR" ] && [ -n "$(ls "$SEED_DIR"/ 2>/dev/null)" ]; then
@@ -116,6 +113,10 @@ if [ -d "$SEED_DIR" ] && [ -n "$(ls "$SEED_DIR"/ 2>/dev/null)" ]; then
 else
   echo "Warning: No seed images found at $SEED_DIR — skipping."
 fi
+
+# Populate foster dogs (after images so photo lookups succeed)
+echo "Populating foster dogs..."
+/bin/sh /var/www/html/scripts/populate-fosters.sh
 
 # Create Editor-role accounts for content editors.
 # Editors can create/edit pages, posts, and custom post types (foster dogs),

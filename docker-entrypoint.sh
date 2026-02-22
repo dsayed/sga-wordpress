@@ -73,11 +73,30 @@ if command -v wp &>/dev/null && [ -n "$WP_HOME" ]; then
     $WP post create --post_type=page --post_title='Resources' --post_name='resources' --post_status=publish
     $WP post create --post_type=page --post_title='Events' --post_name='events' --post_status=publish
 
-    # Populate page content and foster dogs
+    # Populate page content
     if [ -f /var/www/html/scripts/populate-content.php ]; then
       echo "Populating page content..."
       cat /var/www/html/scripts/populate-content.php | $WP eval-file -
     fi
+
+    # Import seed images BEFORE creating foster dogs so attachment slugs
+    # don't collide (fosters and images share names like "binky", "aiden")
+    if [ -d /tmp/seed-uploads ] && [ -n "$(ls /tmp/seed-uploads/ 2>/dev/null)" ]; then
+      echo "=== Importing seed images ==="
+      mkdir -p /var/www/html/web/app/uploads/seed
+      cp -rn /tmp/seed-uploads/* /var/www/html/web/app/uploads/seed/
+      for img in /var/www/html/web/app/uploads/seed/*; do
+        [ -f "$img" ] || continue
+        ATTACH_ID=$($WP media import "$img" --porcelain 2>/dev/null) || true
+        if [ "$(basename "$img")" = "sgalogo-1.png" ] && [ -n "$ATTACH_ID" ]; then
+          $WP option update site_logo "$ATTACH_ID"
+          $WP option update site_icon "$ATTACH_ID"
+        fi
+      done
+      echo "=== Seed images imported ==="
+    fi
+
+    # Populate foster dogs (after images so photo lookups succeed)
     if [ -f /var/www/html/scripts/populate-fosters.sh ]; then
       echo "Populating foster dogs..."
       /bin/sh /var/www/html/scripts/populate-fosters.sh
