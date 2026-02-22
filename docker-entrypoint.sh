@@ -17,10 +17,21 @@ RewriteRule . /index.php [L]
 # END WordPress
 HTACCESS
 
-# Railway sets PORT env var; make Apache listen on it
-# Falls back to 80 if PORT is not set (local dev)
-sed -i "s/Listen 80/Listen ${PORT:-80}/" /etc/apache2/ports.conf
-sed -i "s/<VirtualHost \*:80>/<VirtualHost *:${PORT:-80}>/" /etc/apache2/sites-available/000-default.conf
+# Configure Apache to listen on the correct port
+# Railway sets PORT env var; falls back to 80 for local dev
+LISTEN_PORT="${PORT:-80}"
+echo "Listen ${LISTEN_PORT}" > /etc/apache2/ports.conf
+cat > /etc/apache2/sites-available/000-default.conf << VHOST
+<VirtualHost *:${LISTEN_PORT}>
+    ServerAdmin webmaster@localhost
+    DocumentRoot ${APACHE_DOCUMENT_ROOT:-/var/www/html/web}
+    ErrorLog \${APACHE_LOG_DIR}/error.log
+    CustomLog \${APACHE_LOG_DIR}/access.log combined
+    <Directory ${APACHE_DOCUMENT_ROOT:-/var/www/html/web}>
+        AllowOverride All
+    </Directory>
+</VirtualHost>
+VHOST
 
 # Hand off to Apache
 exec apache2-foreground

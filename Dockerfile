@@ -7,8 +7,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && docker-php-ext-install mysqli pdo pdo_mysql zip \
     && rm -rf /var/lib/apt/lists/*
 
-# Enable Apache mod_rewrite for WordPress permalinks
-RUN a2enmod rewrite
+# Ensure only mpm_prefork is loaded (required for mod_php)
+# and enable mod_rewrite for WordPress permalinks
+RUN a2dismod mpm_event 2>/dev/null; a2enmod mpm_prefork rewrite
 
 # Set the document root to Bedrock's web/ directory
 ENV APACHE_DOCUMENT_ROOT=/var/www/html/web
