@@ -87,60 +87,44 @@ Changes to theme/plugin files take effect immediately — no container restart n
 
 ## Architecture
 
-```
-┌─ YOUR MACHINE ──────────────────────────────────────────────────────┐
-│                                                                     │
-│   sga-wordpress/  (Bedrock project)                                 │
-│   ├── web/app/themes/       ← theme files you edit                  │
-│   ├── web/app/plugins/      ← plugins (Composer-managed)            │
-│   ├── web/app/mu-plugins/   ← auto-loaded plugins (env banner)      │
-│   ├── web/wp/               ← WordPress core (don't edit)           │
-│   ├── composer.json         ← declares WP core + plugins            │
-│   └── .env                  ← local database credentials            │
-│                                                                     │
-│   Docker Compose                                                    │
-│   ┌──────────────┐  ┌─────────────────┐  ┌──────────┐              │
-│   │  db           │  │  wordpress       │  │  wpcli   │              │
-│   │  MySQL 8.0    │◄─│  PHP 8.2+Apache  │  │  (on     │              │
-│   │  port 3306    │  │  port 8080       │  │  demand) │              │
-│   └──────────────┘  └─────────────────┘  └──────────┘              │
-│                              │                                      │
-│                     http://localhost:8080                            │
-│                     DEVELOPMENT banner (blue)                       │
-└─────────────────────────────────────────────────────────────────────┘
-         │
-         │  git push to main
-         ▼
-┌─ GITHUB ────────────────────────────────────────────────────────────┐
-│                                                                     │
-│   dsayed/sga-wordpress                                              │
-│                                                                     │
-│   GitHub Actions (.github/workflows/deploy.yml)                     │
-│   1. Checkout code                                                  │
-│   2. Setup PHP 8.2                                                  │
-│   3. composer install --no-dev                                      │
-│   4. Deploy to Azure via publish profile                            │
-│                                                                     │
-└─────────────────────────────────────────────────────────────────────┘
-         │
-         │  deploys automatically (~2 min)
-         ▼
-┌─ AZURE ─────────────────────────────────────────────────────────────┐
-│                                                                     │
-│   App Service: sga-wordpress-staging (Central US, B1 Linux)         │
-│   ┌─────────────────────────┐    ┌──────────────────────────────┐   │
-│   │  PHP 8.2 + nginx        │───▶│  MySQL Flexible Server       │   │
-│   │  Custom nginx.conf sets │    │  mysql-sga-test (West US 3)  │   │
-│   │  doc root to web/       │    │  Burstable B1s               │   │
-│   └─────────────────────────┘    └──────────────────────────────┘   │
-│            │                                                        │
-│   https://sga-wordpress-staging.azurewebsites.net                   │
-│   STAGING banner (orange)                                           │
-│                                                                     │
-│   App Settings replace .env (DB creds, WP salts, WP_ENV=staging)    │
-│   Infrastructure defined in infrastructure/main.bicep               │
-│                                                                     │
-└─────────────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart TD
+    subgraph local["YOUR MACHINE"]
+        subgraph bedrock["sga-wordpress/ (Bedrock project)"]
+            files["web/app/themes/ — theme files you edit
+web/app/plugins/ — Composer-managed
+web/app/mu-plugins/ — auto-loaded plugins
+web/wp/ — WordPress core (don't edit)
+composer.json — declares WP core + plugins
+.env — local database credentials"]
+        end
+        subgraph docker["Docker Compose"]
+            db["db\nMySQL 8.0\nport 3306"]
+            wp["wordpress\nPHP 8.2 + Apache\nport 8080"]
+            wpcli["wpcli\n(on demand)"]
+            wp -->|queries| db
+        end
+        localurl["http://localhost:8080\nDEVELOPMENT banner (blue)"]
+        wp --> localurl
+    end
+
+    subgraph github["GITHUB"]
+        repo["dsayed/sga-wordpress"]
+        actions["GitHub Actions\n1. Checkout code\n2. Setup PHP 8.2\n3. composer install --no-dev\n4. Deploy via publish profile"]
+        repo --> actions
+    end
+
+    subgraph azure["AZURE"]
+        appservice["App Service: sga-wordpress-staging\nPHP 8.2 + nginx\nCentral US, B1 Linux"]
+        mysql["MySQL Flexible Server\nmysql-sga-test\nWest US 3, Burstable B1s"]
+        appservice -->|queries| mysql
+        azureurl["https://sga-wordpress-staging.azurewebsites.net\nSTAGING banner (orange)"]
+        appservice --> azureurl
+        settings["App Settings replace .env\nDB creds, WP salts, WP_ENV=staging\nInfrastructure: main.bicep"]
+    end
+
+    local -->|"git push to main"| github
+    github -->|"deploys automatically (~2 min)"| azure
 ```
 
 ### How the pieces fit together
