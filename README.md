@@ -87,10 +87,73 @@ Changes to theme/plugin files take effect immediately — no container restart n
 
 ## Architecture
 
-- **[Bedrock](https://roots.io/bedrock/)** — WordPress as a Composer-managed project
-- **Docker Compose** — local development (PHP 8.2 + MySQL 8.0)
-- **Gutenverse** — FSE block library
-- **GitHub Actions** — CI/CD deployment to Azure App Service
+```
+┌─ YOUR MACHINE ──────────────────────────────────────────────────────┐
+│                                                                     │
+│   sga-wordpress/  (Bedrock project)                                 │
+│   ├── web/app/themes/       ← theme files you edit                  │
+│   ├── web/app/plugins/      ← plugins (Composer-managed)            │
+│   ├── web/app/mu-plugins/   ← auto-loaded plugins (env banner)      │
+│   ├── web/wp/               ← WordPress core (don't edit)           │
+│   ├── composer.json         ← declares WP core + plugins            │
+│   └── .env                  ← local database credentials            │
+│                                                                     │
+│   Docker Compose                                                    │
+│   ┌──────────────┐  ┌─────────────────┐  ┌──────────┐              │
+│   │  db           │  │  wordpress       │  │  wpcli   │              │
+│   │  MySQL 8.0    │◄─│  PHP 8.2+Apache  │  │  (on     │              │
+│   │  port 3306    │  │  port 8080       │  │  demand) │              │
+│   └──────────────┘  └─────────────────┘  └──────────┘              │
+│                              │                                      │
+│                     http://localhost:8080                            │
+│                     DEVELOPMENT banner (blue)                       │
+└─────────────────────────────────────────────────────────────────────┘
+         │
+         │  git push to main
+         ▼
+┌─ GITHUB ────────────────────────────────────────────────────────────┐
+│                                                                     │
+│   dsayed/sga-wordpress                                              │
+│                                                                     │
+│   GitHub Actions (.github/workflows/deploy.yml)                     │
+│   1. Checkout code                                                  │
+│   2. Setup PHP 8.2                                                  │
+│   3. composer install --no-dev                                      │
+│   4. Deploy to Azure via publish profile                            │
+│                                                                     │
+└─────────────────────────────────────────────────────────────────────┘
+         │
+         │  deploys automatically (~2 min)
+         ▼
+┌─ AZURE ─────────────────────────────────────────────────────────────┐
+│                                                                     │
+│   App Service: sga-wordpress-staging (Central US, B1 Linux)         │
+│   ┌─────────────────────────┐    ┌──────────────────────────────┐   │
+│   │  PHP 8.2 + nginx        │───▶│  MySQL Flexible Server       │   │
+│   │  Custom nginx.conf sets │    │  mysql-sga-test (West US 3)  │   │
+│   │  doc root to web/       │    │  Burstable B1s               │   │
+│   └─────────────────────────┘    └──────────────────────────────┘   │
+│            │                                                        │
+│   https://sga-wordpress-staging.azurewebsites.net                   │
+│   STAGING banner (orange)                                           │
+│                                                                     │
+│   App Settings replace .env (DB creds, WP salts, WP_ENV=staging)    │
+│   Infrastructure defined in infrastructure/main.bicep               │
+│                                                                     │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+### How the pieces fit together
+
+**[Bedrock](https://roots.io/bedrock/)** is a WordPress boilerplate by Roots that treats WordPress like a modern application. Instead of downloading WordPress and dumping plugins into `wp-content/`, Bedrock manages everything through Composer (PHP's package manager). WordPress core, themes, and plugins are all declared as dependencies in `composer.json`. This means the entire stack is version-controlled and reproducible — anyone can clone the repo and get an identical environment.
+
+**Docker Compose** runs the local development environment. It spins up a MySQL database and a PHP web server as isolated containers. Your project files are mounted into the WordPress container, so edits show up instantly without rebuilding. The `wpcli` container exists only to run administrative commands (install plugins, reset passwords, etc.) and exits immediately after each command.
+
+**GitHub Actions** handles continuous deployment. When you push to `main`, a workflow checks out the code, installs Composer dependencies (without dev packages), and deploys the result to Azure. The whole pipeline takes about 2 minutes. Authentication uses a publish profile stored as a GitHub secret — no Azure credentials in the repo.
+
+**Azure App Service** hosts the staging site. It runs PHP 8.2 on Linux with nginx (not Apache like local). A custom `nginx.conf` in the repo sets the document root to Bedrock's `web/` directory. Database credentials and WordPress salts are stored as App Settings (Azure's equivalent of environment variables), following the [twelve-factor app](https://12factor.net/config) principle of keeping config out of code.
+
+**Local and Azure are independent environments.** They have separate databases with separate content. The environment banner — blue for development, orange for staging — makes it obvious which environment you're looking at.
 
 ## Azure Staging
 
