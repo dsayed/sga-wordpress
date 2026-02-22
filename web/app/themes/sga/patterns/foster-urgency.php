@@ -11,12 +11,13 @@ $dogs = new WP_Query([
     'posts_per_page' => 3,
     'post_status'    => 'publish',
     'meta_query'     => [
-        [
+        'urgency_clause' => [
             'key'     => 'foster_dog_urgency',
             'value'   => ['urgent', 'needed'],
             'compare' => 'IN',
         ],
     ],
+    'orderby' => ['urgency_clause' => 'DESC'],
 ]);
 
 // Hide the entire section if no dogs need fosters

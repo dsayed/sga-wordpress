@@ -73,6 +73,16 @@ if command -v wp &>/dev/null && [ -n "$WP_HOME" ]; then
     $WP post create --post_type=page --post_title='Resources' --post_name='resources' --post_status=publish
     $WP post create --post_type=page --post_title='Events' --post_name='events' --post_status=publish
 
+    # Populate page content and foster dogs
+    if [ -f /var/www/html/scripts/populate-content.php ]; then
+      echo "Populating page content..."
+      cat /var/www/html/scripts/populate-content.php | $WP eval-file -
+    fi
+    if [ -f /var/www/html/scripts/populate-fosters.sh ]; then
+      echo "Populating foster dogs..."
+      /bin/sh /var/www/html/scripts/populate-fosters.sh
+    fi
+
     # Create editor accounts
     $WP user create lily lily@savinggreatanimals.org --role=editor --display_name='Lily Piecora' 2>/dev/null || true
     $WP user create jacintha jacintha@savinggreatanimals.org --role=editor --display_name='Jacintha Sayed' 2>/dev/null || true

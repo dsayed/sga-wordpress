@@ -84,7 +84,16 @@ $WP post create --post_type=page --post_title='Events' --post_name='events' --po
 # Set homepage to use front-page.html template (no static page needed)
 $WP option update show_on_front 'posts'
 
-echo "Pages created. Use the block editor to add SGA patterns to each page."
+echo "Pages created."
+
+# Populate page content from template
+echo "Populating page content..."
+cat /var/www/html/scripts/populate-content.php | $WP eval-file -
+echo "Page content populated."
+
+# Populate foster dogs
+echo "Populating foster dogs..."
+/bin/sh /var/www/html/scripts/populate-fosters.sh
 
 # Import seed images into the media library
 echo "Importing seed images..."
