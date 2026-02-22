@@ -1,0 +1,15 @@
+.git
+.github
+.worktrees
+.env
+.env.*
+!.env.example
+vendor
+node_modules
+infrastructure
+scripts
+docs
+*.md
+!composer.json
+!composer.lock
+docker-compose.yml
