@@ -29,11 +29,26 @@ add_action('init', function () {
         'public'       => true,
         'has_archive'  => false,
         'rewrite'      => ['slug' => 'foster-dog'],
-        'menu_icon'    => 'dashicons-heart',
+        'menu_icon'    => 'dashicons-pets',
         'menu_position'=> 5,
         'supports'     => ['title', 'thumbnail'],
         'show_in_rest' => true,
     ]);
+});
+
+/**
+ * Limit uploaded image size and compress JPEGs.
+ * WordPress scales down images above the "big image" threshold and saves
+ * the scaled version as the main file. We lower the threshold from the
+ * default 2560px to 1200px — more than enough for foster dog cards and
+ * prevents multi-MB originals from eating up storage.
+ */
+add_filter('big_image_size_threshold', function () {
+    return 1200;
+});
+
+add_filter('jpeg_quality', function () {
+    return 82;
 });
 
 /**
