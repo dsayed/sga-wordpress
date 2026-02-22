@@ -77,11 +77,17 @@ if command -v wp &>/dev/null && [ -n "$WP_HOME" ]; then
     $WP user create lily lily@savinggreatanimals.org --role=editor --display_name='Lily Piecora' 2>/dev/null || true
     $WP user create jacintha jacintha@savinggreatanimals.org --role=editor --display_name='Jacintha Sayed' 2>/dev/null || true
 
-    # Import seed images into the media library
-    # On Railway, the uploads volume starts empty. Seed images are stashed
-    # at /tmp/seed-uploads during Docker build (before the volume mount).
-    if [ -d /tmp/seed-uploads ] && [ -n "$(ls /tmp/seed-uploads/ 2>/dev/null)" ]; then
-      echo "Importing seed images..."
+    echo "=== WordPress setup complete ==="
+  fi
+
+  # Sync seed images into the uploads volume (runs on every boot, not just first)
+  # On Railway, the uploads volume persists but starts empty. Seed images are
+  # stashed at /tmp/seed-uploads during Docker build (before the volume mount).
+  # Skips if images are already imported (checks for any attachment posts).
+  if [ -d /tmp/seed-uploads ] && [ -n "$(ls /tmp/seed-uploads/ 2>/dev/null)" ]; then
+    ATTACHMENT_COUNT=$($WP post list --post_type=attachment --format=count 2>/dev/null) || ATTACHMENT_COUNT=0
+    if [ "$ATTACHMENT_COUNT" -eq 0 ]; then
+      echo "=== Importing seed images ==="
       mkdir -p /var/www/html/web/app/uploads/seed
       cp -rn /tmp/seed-uploads/* /var/www/html/web/app/uploads/seed/
       for img in /var/www/html/web/app/uploads/seed/*; do
@@ -92,10 +98,8 @@ if command -v wp &>/dev/null && [ -n "$WP_HOME" ]; then
           $WP option update site_icon "$ATTACH_ID"
         fi
       done
-      echo "Seed images imported."
+      echo "=== Seed images imported ==="
     fi
-
-    echo "=== WordPress setup complete ==="
   fi
 fi
 
