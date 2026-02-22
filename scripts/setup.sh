@@ -46,6 +46,23 @@ $WP option update timezone_string "America/Los_Angeles"
 $WP option update date_format "F j, Y"
 $WP option update permalink_structure "/%postname%/"
 
+# Generate .htaccess for pretty permalinks
+# WP-CLI's rewrite flush can't write .htaccess from the CLI container,
+# so we write it directly. This is the standard WordPress rewrite block.
+cat > /var/www/html/web/.htaccess << 'HTACCESS'
+# BEGIN WordPress
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+</IfModule>
+# END WordPress
+HTACCESS
+echo ".htaccess created."
+
 # Remove default content
 echo "Cleaning default content..."
 $WP post delete 1 --force 2>/dev/null || true
