@@ -45,3 +45,4 @@ RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 EXPOSE 8080
 
 CMD ["docker-entrypoint.sh"]
+# Build: 1771789070
