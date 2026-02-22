@@ -77,6 +77,24 @@ if command -v wp &>/dev/null && [ -n "$WP_HOME" ]; then
     $WP user create lily lily@savinggreatanimals.org --role=editor --display_name='Lily Piecora' 2>/dev/null || true
     $WP user create jacintha jacintha@savinggreatanimals.org --role=editor --display_name='Jacintha Sayed' 2>/dev/null || true
 
+    # Import seed images into the media library
+    # On Railway, the uploads volume starts empty. Seed images are stashed
+    # at /tmp/seed-uploads during Docker build (before the volume mount).
+    if [ -d /tmp/seed-uploads ] && [ -n "$(ls /tmp/seed-uploads/ 2>/dev/null)" ]; then
+      echo "Importing seed images..."
+      mkdir -p /var/www/html/web/app/uploads/seed
+      cp -rn /tmp/seed-uploads/* /var/www/html/web/app/uploads/seed/
+      for img in /var/www/html/web/app/uploads/seed/*; do
+        [ -f "$img" ] || continue
+        ATTACH_ID=$($WP media import "$img" --porcelain 2>/dev/null) || true
+        if [ "$(basename "$img")" = "sgalogo-1.png" ] && [ -n "$ATTACH_ID" ]; then
+          $WP option update site_logo "$ATTACH_ID"
+          $WP option update site_icon "$ATTACH_ID"
+        fi
+      done
+      echo "Seed images imported."
+    fi
+
     echo "=== WordPress setup complete ==="
   fi
 fi

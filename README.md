@@ -13,7 +13,6 @@ git clone https://github.com/dsayed/sga-wordpress.git
 cd sga-wordpress
 cp .env.example .env
 docker compose up -d --build
-docker compose run --rm -v $(pwd)/scripts:/scripts --entrypoint sh wpcli /scripts/setup.sh
 ```
 
 4. Open http://localhost:8080 — you should see the site with a blue DEVELOPMENT banner
@@ -83,13 +82,24 @@ docker compose run --rm wpcli user list --path=/var/www/html/web/wp
 
 ### Fresh start
 
-To wipe the database and reinstall from scratch:
+To wipe the database and start fresh:
 
 ```bash
 docker compose down -v
-docker compose up -d --build
-docker compose run --rm -v $(pwd)/scripts:/scripts --entrypoint sh wpcli /scripts/setup.sh
+docker compose up -d
 ```
+
+That's it. The database is automatically restored from `scripts/seed.sql` — all pages, users, settings, and the site logo come back on their own.
+
+### Saving your work to the seed
+
+If you make content changes (new pages, updated settings, etc.) that should be the new default state, update the seed file:
+
+```bash
+docker compose exec db mysqldump -usga -psga_pass sga_wordpress > scripts/seed.sql
+```
+
+Then commit `scripts/seed.sql`. This becomes the new baseline for all fresh starts.
 
 ### File structure
 

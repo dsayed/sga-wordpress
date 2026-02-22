@@ -9,6 +9,7 @@ services:
       MYSQL_PASSWORD: sga_pass
     volumes:
       - db_data:/var/lib/mysql
+      - ./scripts/seed.sql:/docker-entrypoint-initdb.d/seed.sql:ro
     ports:
       - "3306:3306"
     healthcheck:

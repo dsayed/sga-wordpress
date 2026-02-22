@@ -12,7 +12,7 @@ Public website for Saving Great Animals, a Seattle-based dog rescue.
 
 ## Key Commands
 - `docker compose up -d --build` — start local environment
-- `docker compose down -v` — tear down (including database)
+- `docker compose down -v` — tear down (wipes database, auto-restored from seed on next start)
 - `docker compose run --rm wpcli <command> --path=/var/www/html/web/wp` — run WP-CLI
 - `docker run --rm -v $(pwd):/app -w /app composer <command>` — run Composer
 
@@ -20,7 +20,8 @@ Public website for Saving Great Animals, a Seattle-based dog rescue.
 - `web/app/themes/` — themes (Composer-managed)
 - `web/app/plugins/` — plugins (Composer-managed)
 - `config/application.php` — WordPress config (reads from .env)
-- `scripts/setup.sh` — bootstraps fresh install
+- `scripts/seed.sql` — database seed (auto-imported on fresh start, version-controlled)
+- `scripts/setup.sh` — bootstraps fresh install (manual alternative to seed)
 - `.env` — local environment variables (not committed)
 
 ## Railway Staging
@@ -51,6 +52,8 @@ Public website for Saving Great Animals, a Seattle-based dog rescue.
 - **Site**: http://localhost:8080
 - **Admin**: http://localhost:8080/wp/wp-admin/ (admin / admin)
 - **Stack**: Docker Compose → PHP 8.2 (Apache) + MySQL 8.0
+- **Database seed**: `scripts/seed.sql` auto-imported on fresh start — no manual setup needed
+- **Save content changes**: `docker compose exec db mysqldump -usga -psga_pass sga_wordpress > scripts/seed.sql`
 - Local and Railway have separate databases — content does not sync
 
 ## Git

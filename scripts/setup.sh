@@ -86,6 +86,28 @@ $WP option update show_on_front 'posts'
 
 echo "Pages created. Use the block editor to add SGA patterns to each page."
 
+# Import seed images into the media library
+echo "Importing seed images..."
+SEED_DIR="/var/www/html/web/app/uploads/seed"
+if [ -d "$SEED_DIR" ] && [ -n "$(ls "$SEED_DIR"/ 2>/dev/null)" ]; then
+  for img in "$SEED_DIR"/*; do
+    TITLE=$(basename "$img" | sed 's/\.[^.]*$//' | tr '-' ' ')
+    ATTACH_ID=$($WP media import "$img" --title="$TITLE" --porcelain 2>/dev/null) || true
+    case "$(basename "$img")" in
+      sgalogo-1.png)
+        if [ -n "$ATTACH_ID" ]; then
+          $WP option update site_logo "$ATTACH_ID"
+          $WP option update site_icon "$ATTACH_ID"
+          echo "Site logo set (attachment ID: $ATTACH_ID)."
+        fi
+        ;;
+    esac
+  done
+  echo "Seed images imported."
+else
+  echo "Warning: No seed images found at $SEED_DIR — skipping."
+fi
+
 # Create Editor-role accounts for content editors.
 # Editors can create/edit pages, posts, and custom post types (foster dogs),
 # but CANNOT access the Site Editor or change theme settings.

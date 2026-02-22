@@ -34,6 +34,10 @@ WORKDIR /var/www/html
 COPY . .
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
+# Stash seed images so the entrypoint can copy them into the uploads volume
+# (Railway's volume mount at web/app/uploads/ hides the image layer's files)
+RUN cp -r web/app/uploads/seed /tmp/seed-uploads 2>/dev/null || true
+
 # Entrypoint generates .htaccess and configures Apache PORT at runtime
 COPY docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
