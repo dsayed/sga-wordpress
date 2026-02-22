@@ -22,6 +22,11 @@ RUN sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/ s/AllowOverride None/Allo
 # Install Composer for dependency management
 COPY --from=composer:2 /usr/bin/composer /usr/local/bin/composer
 
+# Install WP-CLI for automated WordPress setup
+RUN curl -sO https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
+    && chmod +x wp-cli.phar \
+    && mv wp-cli.phar /usr/local/bin/wp
+
 WORKDIR /var/www/html
 
 # Copy project files and install dependencies

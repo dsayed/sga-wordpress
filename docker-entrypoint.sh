@@ -39,5 +39,47 @@ rm -f /etc/apache2/mods-enabled/mpm_event.* /etc/apache2/mods-enabled/mpm_worker
 ln -sf /etc/apache2/mods-available/mpm_prefork.conf /etc/apache2/mods-enabled/ 2>/dev/null || true
 ln -sf /etc/apache2/mods-available/mpm_prefork.load /etc/apache2/mods-enabled/ 2>/dev/null || true
 
+# Auto-setup WordPress on first boot (idempotent — skips if already installed)
+if command -v wp &>/dev/null && [ -n "$WP_HOME" ]; then
+  WP="wp --allow-root --path=/var/www/html/web/wp"
+  if ! $WP core is-installed 2>/dev/null; then
+    echo "=== First boot: installing WordPress ==="
+    $WP core install \
+      --url="$WP_HOME" \
+      --title="Saving Great Animals" \
+      --admin_user="admin" \
+      --admin_password="${WP_ADMIN_PASSWORD:-changeme}" \
+      --admin_email="admin@savinggreatanimals.org"
+
+    $WP theme activate sga
+    $WP plugin activate the-events-calendar
+
+    $WP option update blogdescription "The Right Dog For The Right Home"
+    $WP option update timezone_string "America/Los_Angeles"
+    $WP option update date_format "F j, Y"
+    $WP option update permalink_structure "/%postname%/"
+    $WP option update show_on_front "posts"
+
+    # Create pages
+    $WP post delete 1 --force 2>/dev/null || true
+    $WP post delete 2 --force 2>/dev/null || true
+    $WP post create --post_type=page --post_title='Adopt' --post_name='adopt' --post_status=publish --post_content='[available_dogs]'
+    $WP post create --post_type=page --post_title='Foster' --post_name='foster' --post_status=publish
+    $WP post create --post_type=page --post_title='Dogs Needing Fosters' --post_name='dogs-needing-fosters' --post_status=publish --post_content='[foster_dogs]'
+    $WP post create --post_type=page --post_title='Get Involved' --post_name='get-involved' --post_status=publish
+    $WP post create --post_type=page --post_title='About' --post_name='about' --post_status=publish
+    $WP post create --post_type=page --post_title='Donate' --post_name='donate' --post_status=publish
+    $WP post create --post_type=page --post_title='Surrender' --post_name='surrender' --post_status=publish
+    $WP post create --post_type=page --post_title='Resources' --post_name='resources' --post_status=publish
+    $WP post create --post_type=page --post_title='Events' --post_name='events' --post_status=publish
+
+    # Create editor accounts
+    $WP user create lily lily@savinggreatanimals.org --role=editor --display_name='Lily Piecora' 2>/dev/null || true
+    $WP user create jacintha jacintha@savinggreatanimals.org --role=editor --display_name='Jacintha Sayed' 2>/dev/null || true
+
+    echo "=== WordPress setup complete ==="
+  fi
+fi
+
 # Hand off to Apache
 exec apache2-foreground
