@@ -102,6 +102,24 @@ sga_update_page('foster', '
 </div>
 <!-- /wp:group -->
 
+<!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60","left":"24px","right":"24px"}},"color":{"background":"#FFF5EB"}},"layout":{"type":"constrained"}} -->
+<div class="wp-block-group alignfull" style="background-color:#FFF5EB;padding-top:var(--wp--preset--spacing--60);padding-right:24px;padding-bottom:var(--wp--preset--spacing--60);padding-left:24px">
+
+<!-- wp:heading {"textAlign":"center","style":{"typography":{"fontSize":"clamp(1.5rem, 3vw, 2.2rem)"},"spacing":{"margin":{"bottom":"16px"}}}} -->
+<h2 class="wp-block-heading has-text-align-center" style="font-size:clamp(1.5rem, 3vw, 2.2rem);margin-bottom:16px">Dogs Needing Foster Homes</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"18px"},"spacing":{"margin":{"bottom":"32px"}}}} -->
+<p class="has-text-align-center" style="font-size:18px;margin-bottom:32px">These dogs are waiting for a foster family. Could it be you?</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[foster_dogs show_secured="no"]
+<!-- /wp:shortcode -->
+
+</div>
+<!-- /wp:group -->
+
 <!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60","left":"24px","right":"24px"}},"color":{"background":"#F3F0EC"}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull" style="background-color:#F3F0EC;padding-top:var(--wp--preset--spacing--60);padding-right:24px;padding-bottom:var(--wp--preset--spacing--60);padding-left:24px">
 
