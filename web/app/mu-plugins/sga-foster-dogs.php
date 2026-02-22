@@ -208,7 +208,8 @@ add_shortcode('foster_dogs', function ($atts) {
             default   => 'Foster Needed',
         };
 
-        echo '<div class="sga-foster-card" style="background:#F3F0EC;border-radius:12px;overflow:hidden;">';
+        $permalink = get_permalink($dog['id']);
+        echo '<a href="' . esc_url($permalink) . '" class="sga-foster-card" style="display:block;background:#F3F0EC;border-radius:12px;overflow:hidden;text-decoration:none;color:inherit;transition:box-shadow 0.2s;">';
 
         if ($dog['image']) {
             echo '<img src="' . esc_url($dog['image']) . '" alt="' . esc_attr($dog['title']) . '"'
@@ -232,7 +233,7 @@ add_shortcode('foster_dogs', function ($atts) {
             echo '<p style="margin:0;color:#4B5563;font-size:15px;">' . esc_html($dog['notes']) . '</p>';
         }
 
-        echo '</div></div>';
+        echo '</div></a>';
     }
 
     echo '</div>';
@@ -264,3 +265,66 @@ add_action('manage_foster_dog_posts_custom_column', function ($column, $post_id)
         echo esc_html(get_post_meta($post_id, 'foster_dog_breed', true) ?: '—');
     }
 }, 10, 2);
+
+/**
+ * Card hover effect.
+ */
+add_action('wp_head', function () {
+    if (!is_singular('foster_dog') && !has_shortcode(get_post()->post_content ?? '', 'foster_dogs')) return;
+    echo '<style>.sga-foster-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.12);}</style>';
+});
+
+/**
+ * Render the single foster dog detail page.
+ * Hooked into the_content for foster_dog posts since the CPT has no editor support.
+ */
+add_filter('the_content', function ($content) {
+    if (!is_singular('foster_dog') || !in_the_loop() || !is_main_query()) {
+        return $content;
+    }
+
+    $post_id = get_the_ID();
+    $breed   = get_post_meta($post_id, 'foster_dog_breed', true);
+    $age     = get_post_meta($post_id, 'foster_dog_age', true);
+    $urgency = get_post_meta($post_id, 'foster_dog_urgency', true) ?: 'needed';
+    $notes   = get_post_meta($post_id, 'foster_dog_notes', true);
+    $image   = get_the_post_thumbnail_url($post_id, 'large');
+
+    $badge_color = match ($urgency) {
+        'urgent'  => '#E8772B',
+        'secured' => '#22C55E',
+        default   => '#2B3990',
+    };
+    $badge_text = match ($urgency) {
+        'urgent'  => 'Urgent — needs foster ASAP',
+        'secured' => 'Foster Secured',
+        default   => 'Foster Needed',
+    };
+
+    ob_start();
+    echo '<div style="max-width:720px;margin:0 auto;">';
+
+    if ($image) {
+        echo '<img src="' . esc_url($image) . '" alt="' . esc_attr(get_the_title()) . '"'
+           . ' style="width:100%;max-height:480px;object-fit:cover;border-radius:12px;margin-bottom:24px;">';
+    }
+
+    echo '<span style="display:inline-block;background:' . $badge_color . ';color:#fff;padding:6px 14px;border-radius:20px;font-size:14px;font-weight:700;margin-bottom:16px;">' . esc_html($badge_text) . '</span>';
+
+    if ($breed || $age) {
+        $details = array_filter([$breed, $age]);
+        echo '<p style="font-size:18px;color:#4B5563;margin:0 0 16px;">' . esc_html(implode(' · ', $details)) . '</p>';
+    }
+
+    if ($notes) {
+        echo '<p style="font-size:16px;color:#4B5563;line-height:1.6;margin:0 0 32px;">' . esc_html($notes) . '</p>';
+    }
+
+    echo '<div style="display:flex;flex-wrap:wrap;gap:12px;">';
+    echo '<a href="https://secure.savinggreatanimals.org" style="display:inline-block;background:#E8772B;color:#fff;padding:14px 28px;border-radius:6px;font-weight:700;font-size:16px;text-decoration:none;">Apply to Foster</a>';
+    echo '<a href="/foster/" style="display:inline-block;background:#2B3990;color:#fff;padding:14px 28px;border-radius:6px;font-weight:700;font-size:16px;text-decoration:none;">Back to Foster Page</a>';
+    echo '</div>';
+
+    echo '</div>';
+    return ob_get_clean();
+});
