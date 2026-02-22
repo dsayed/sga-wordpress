@@ -28,11 +28,9 @@ WORKDIR /var/www/html
 COPY . .
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
-# Railway sets PORT env var; make Apache listen on it at runtime
-# Falls back to 80 if PORT is not set (local dev)
-# NOTE: This must happen at runtime (not build time) because PORT is a runtime env var
-RUN printf '#!/bin/bash\nset -e\nsed -i "s/Listen 80/Listen ${PORT:-80}/" /etc/apache2/ports.conf\nsed -i "s/<VirtualHost \\*:80>/<VirtualHost *:${PORT:-80}>/" /etc/apache2/sites-available/000-default.conf\nexec apache2-foreground\n' > /usr/local/bin/docker-entrypoint.sh \
-    && chmod +x /usr/local/bin/docker-entrypoint.sh
+# Entrypoint generates .htaccess and configures Apache PORT at runtime
+COPY docker-entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
 EXPOSE 8080
 
