@@ -7,7 +7,9 @@
 vendor
 node_modules
 infrastructure
-scripts
+scripts/seed.sql
+scripts/setup.sh
+scripts/import-images
 docs
 *.md
 !composer.json
