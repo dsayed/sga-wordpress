@@ -9,11 +9,12 @@ WP="wp --allow-root --path=/var/www/html/web/wp"
 
 echo "=== SGA WordPress Setup ==="
 
-# Wait for database (simple query test — db check has TLS issues with wordpress:cli image)
+# Wait for database
+# Docker's depends_on:service_healthy handles MySQL readiness. This short
+# sleep covers the gap between MySQL accepting connections and WordPress
+# being fully able to use them (DNS resolution, connection pool warmup).
 echo "Waiting for database..."
-until $WP eval "echo 'db ok';" > /dev/null 2>&1; do
-  sleep 2
-done
+sleep 5
 echo "Database ready."
 
 # Install WordPress if not already installed
