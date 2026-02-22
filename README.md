@@ -113,6 +113,13 @@ web/
 │   └── mu-plugins/      # Must-use plugins (auto-loaded, no activation needed)
 ├── wp/                  # WordPress core (Composer-managed, don't edit)
 └── index.php            # Front controller
+
+scripts/
+├── seed.sql                # Database seed (auto-imported on fresh start)
+├── setup.sh                # Bootstraps fresh install (alternative to seed)
+├── populate-content.php    # Creates/updates all page content
+├── populate-fosters.sh     # Creates foster dog posts with metadata
+└── run-populate.sh         # Wrapper to run populate-content.php on Railway
 ```
 
 Changes to theme/plugin files take effect immediately — no container restart needed.
@@ -129,13 +136,15 @@ The SGA child theme lives in `web/app/themes/sga/`. Changes take effect immediat
 | `parts/footer.html` | Site footer with contact, links, social |
 | `templates/front-page.html` | Homepage layout (hero + tiles + trust) |
 | `templates/page.html` | Generic page layout |
+| `templates/page-foster.html` | Foster page layout |
+| `templates/single-foster_dog.html` | Individual foster dog detail page |
 | `patterns/*.php` | Reusable block patterns (hero, cards, CTA, etc.) |
 
 Custom functionality lives in `web/app/mu-plugins/`:
 
 | File | Purpose |
 |---|---|
-| `sga-foster-dogs.php` | Foster Dog CPT — admin form + `[foster_dogs]` shortcode |
+| `sga-foster-dogs.php` | Foster Dog CPT — admin form, `[foster_dogs]` shortcode, clickable cards with detail pages |
 | `sga-rescuegroups/` | RescueGroups API — `[available_dogs]` and `[dog_count]` shortcodes |
 
 ## Architecture
@@ -191,7 +200,9 @@ Push to `main` — Railway auto-builds the Dockerfile and deploys (~1-2 min).
 
 The `docker-entrypoint.sh` auto-installs WordPress on the first container start:
 - Installs WordPress core, activates the SGA theme and Events Calendar plugin
-- Creates all pages (Adopt, Foster, Dogs Needing Fosters, etc.)
+- Populates all pages with content (via `scripts/populate-content.php`)
+- Imports seed images (hero photos, foster dog photos, logo)
+- Creates foster dogs with photos (via `scripts/populate-fosters.sh`)
 - Creates editor accounts (Lily, Jacintha)
 - Sets timezone, permalinks, and site options
 

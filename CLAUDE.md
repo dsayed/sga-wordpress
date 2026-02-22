@@ -8,6 +8,7 @@ Public website for Saving Great Animals, a Seattle-based dog rescue.
 - **Theme** — SGA child theme of Twenty Twenty-Five (custom theme.json, block patterns, header/footer)
 - **MU-plugins** — sga-foster-dogs.php (Foster Dog CPT), sga-rescuegroups/ (RescueGroups API)
 - **Shortcodes** — [available_dogs], [dog_count], [foster_dogs]
+- **Templates** — front-page, page, page-foster, single-foster_dog
 - **Companion repo** — github.com/dsayed/sga-community (community app, docs, prototypes)
 
 ## Key Commands
@@ -22,6 +23,9 @@ Public website for Saving Great Animals, a Seattle-based dog rescue.
 - `config/application.php` — WordPress config (reads from .env)
 - `scripts/seed.sql` — database seed (auto-imported on fresh start, version-controlled)
 - `scripts/setup.sh` — bootstraps fresh install (manual alternative to seed)
+- `scripts/populate-content.php` — creates/updates all page content (hero blocks, body text)
+- `scripts/populate-fosters.sh` — creates foster dog posts with metadata and photos
+- `scripts/run-populate.sh` — wrapper to run populate-content.php on Railway via SSH
 - `.env` — local environment variables (not committed)
 
 ## Railway Staging
