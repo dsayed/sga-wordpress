@@ -134,7 +134,14 @@ function sga_rg_get_styles() {
         margin-bottom: 32px;
         align-items: center;
     }
-    .sga-dog-filters select,
+    .sga-dog-filters select {
+        padding: 10px 16px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-size: 15px;
+        font-family: inherit;
+        background: #fff;
+    }
     .sga-dog-filters input {
         padding: 10px 16px;
         border: 1px solid #ddd;
@@ -142,6 +149,46 @@ function sga_rg_get_styles() {
         font-size: 15px;
         font-family: inherit;
         background: #fff;
+        flex: 1;
+        min-width: 200px;
+    }
+    .sga-filter-chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 16px;
+    }
+    .sga-filter-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: #2B3990;
+        color: #fff;
+        border-radius: 20px;
+        padding: 6px 12px;
+        font-size: 13px;
+    }
+    .sga-filter-chip button {
+        border: none;
+        background: none;
+        color: #fff;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 15px;
+        padding: 0;
+        line-height: 1;
+    }
+    .sga-dogs-count {
+        color: #4B5563;
+        margin-bottom: 16px;
+    }
+    .sga-no-results {
+        text-align: center;
+        padding: 48px 16px;
+        color: #4B5563;
+    }
+    .sga-dog-card[hidden] {
+        display: none;
     }
     .sga-dog-detail {
         max-width: 900px;
@@ -212,6 +259,10 @@ function sga_rg_get_styles() {
         .sga-dog-filters select,
         .sga-dog-filters input {
             width: 100%;
+            min-width: 0;
+        }
+        .sga-filter-chips {
+            flex-wrap: wrap;
         }
     }
     ';

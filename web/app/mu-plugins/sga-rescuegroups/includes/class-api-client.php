@@ -56,7 +56,7 @@ class SGA_RescueGroups_API_Client {
                     'animalID', 'animalName', 'animalBreed', 'animalSex',
                     'animalGeneralAge', 'animalColor', 'animalCoatLength',
                     'animalHousetrained', 'animalDescription', 'animalPictures',
-                    'animalSpecies',
+                    'animalSpecies', 'animalSizeCurrent',
                 ],
             ],
         ];
@@ -120,7 +120,7 @@ class SGA_RescueGroups_API_Client {
                     'animalID', 'animalName', 'animalBreed', 'animalSex',
                     'animalGeneralAge', 'animalColor', 'animalCoatLength',
                     'animalHousetrained', 'animalDescription', 'animalPictures',
-                    'animalSpecies',
+                    'animalSpecies', 'animalSizeCurrent',
                 ],
             ],
         ];
@@ -186,9 +186,22 @@ class SGA_RescueGroups_API_Client {
             'color'        => $raw['animalColor'] ?? '',
             'coat_length'  => $raw['animalCoatLength'] ?? '',
             'housetrained' => $raw['animalHousetrained'] ?? '',
+            'size'         => self::weight_to_size($raw['animalSizeCurrent'] ?? ''),
             'description'  => $desc,
             'tagline'      => $tagline,
             'photos'       => $photos,
         ];
+    }
+
+    /**
+     * Convert weight in lbs to a size category.
+     */
+    private static function weight_to_size(string $weight): string {
+        $lbs = (float) $weight;
+        if ($lbs <= 0) return '';
+        if ($lbs < 25) return 'Small';
+        if ($lbs < 50) return 'Medium';
+        if ($lbs < 80) return 'Large';
+        return 'X-Large';
     }
 }
