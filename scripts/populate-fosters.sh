@@ -9,10 +9,10 @@ WP="wp --allow-root --path=/var/www/html/web/wp"
 create_foster() {
   local title="$1" breed="$2" age="$3" status="$4" notes="$5"
   ID=$($WP post create --post_type=foster_dog --post_title="$title" --post_status=publish --porcelain)
-  $WP post meta update "$ID" breed "$breed"
-  $WP post meta update "$ID" age "$age"
-  $WP post meta update "$ID" status "$status"
-  $WP post meta update "$ID" notes "$notes"
+  $WP post meta update "$ID" foster_dog_breed "$breed"
+  $WP post meta update "$ID" foster_dog_age "$age"
+  $WP post meta update "$ID" foster_dog_urgency "$status"
+  $WP post meta update "$ID" foster_dog_notes "$notes"
   echo "  Created: $title (ID: $ID, Status: $status)"
 }
 
