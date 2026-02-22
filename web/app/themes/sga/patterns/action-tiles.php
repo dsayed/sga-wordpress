@@ -14,9 +14,10 @@
 
 <!-- wp:column -->
 <div class="wp-block-column">
-<!-- wp:cover {"dimRatio":50,"overlayColor":"contrast","isUserOverlayColor":true,"minHeight":300,"style":{"border":{"radius":"12px"},"spacing":{"padding":{"top":"32px","bottom":"32px","left":"24px","right":"24px"}}}} -->
+<!-- wp:cover {"url":"/app/uploads/2026/02/about-hero.jpg","id":30,"dimRatio":60,"overlayColor":"contrast","isUserOverlayColor":true,"minHeight":300,"style":{"border":{"radius":"12px"},"spacing":{"padding":{"top":"32px","bottom":"32px","left":"24px","right":"24px"}}}} -->
 <div class="wp-block-cover" style="border-radius:12px;padding-top:32px;padding-right:24px;padding-bottom:32px;padding-left:24px;min-height:300px">
-<span aria-hidden="true" class="wp-block-cover__background has-contrast-background-color has-background-dim-50 has-background-dim"></span>
+<span aria-hidden="true" class="wp-block-cover__background has-contrast-background-color has-background-dim-60 has-background-dim"></span>
+<img class="wp-block-cover__image-background wp-image-30" alt="Dogs playing together" src="/app/uploads/2026/02/about-hero.jpg" data-object-fit="cover"/>
 <div class="wp-block-cover__inner-container">
 <!-- wp:heading {"textAlign":"center","level":3,"style":{"color":{"text":"#ffffff"},"typography":{"fontSize":"28px"}}} -->
 <h3 class="wp-block-heading has-text-align-center" style="color:#ffffff;font-size:28px">Adopt</h3>
@@ -39,9 +40,10 @@
 
 <!-- wp:column -->
 <div class="wp-block-column">
-<!-- wp:cover {"dimRatio":50,"overlayColor":"contrast","isUserOverlayColor":true,"minHeight":300,"style":{"border":{"radius":"12px"},"spacing":{"padding":{"top":"32px","bottom":"32px","left":"24px","right":"24px"}}}} -->
+<!-- wp:cover {"url":"/app/uploads/2026/02/foster-hero.jpg","id":31,"dimRatio":60,"overlayColor":"contrast","isUserOverlayColor":true,"minHeight":300,"style":{"border":{"radius":"12px"},"spacing":{"padding":{"top":"32px","bottom":"32px","left":"24px","right":"24px"}}}} -->
 <div class="wp-block-cover" style="border-radius:12px;padding-top:32px;padding-right:24px;padding-bottom:32px;padding-left:24px;min-height:300px">
-<span aria-hidden="true" class="wp-block-cover__background has-contrast-background-color has-background-dim-50 has-background-dim"></span>
+<span aria-hidden="true" class="wp-block-cover__background has-contrast-background-color has-background-dim-60 has-background-dim"></span>
+<img class="wp-block-cover__image-background wp-image-31" alt="Dog with foster family" src="/app/uploads/2026/02/foster-hero.jpg" data-object-fit="cover"/>
 <div class="wp-block-cover__inner-container">
 <!-- wp:heading {"textAlign":"center","level":3,"style":{"color":{"text":"#ffffff"},"typography":{"fontSize":"28px"}}} -->
 <h3 class="wp-block-heading has-text-align-center" style="color:#ffffff;font-size:28px">Foster</h3>
@@ -64,9 +66,10 @@
 
 <!-- wp:column -->
 <div class="wp-block-column">
-<!-- wp:cover {"dimRatio":50,"overlayColor":"contrast","isUserOverlayColor":true,"minHeight":300,"style":{"border":{"radius":"12px"},"spacing":{"padding":{"top":"32px","bottom":"32px","left":"24px","right":"24px"}}}} -->
+<!-- wp:cover {"url":"/app/uploads/2026/02/get-involved-hero.jpg","id":35,"dimRatio":60,"overlayColor":"contrast","isUserOverlayColor":true,"minHeight":300,"style":{"border":{"radius":"12px"},"spacing":{"padding":{"top":"32px","bottom":"32px","left":"24px","right":"24px"}}}} -->
 <div class="wp-block-cover" style="border-radius:12px;padding-top:32px;padding-right:24px;padding-bottom:32px;padding-left:24px;min-height:300px">
-<span aria-hidden="true" class="wp-block-cover__background has-contrast-background-color has-background-dim-50 has-background-dim"></span>
+<span aria-hidden="true" class="wp-block-cover__background has-contrast-background-color has-background-dim-60 has-background-dim"></span>
+<img class="wp-block-cover__image-background wp-image-35" alt="Person hugging a dog" src="/app/uploads/2026/02/get-involved-hero.jpg" data-object-fit="cover"/>
 <div class="wp-block-cover__inner-container">
 <!-- wp:heading {"textAlign":"center","level":3,"style":{"color":{"text":"#ffffff"},"typography":{"fontSize":"28px"}}} -->
 <h3 class="wp-block-heading has-text-align-center" style="color:#ffffff;font-size:28px">Get Involved</h3>

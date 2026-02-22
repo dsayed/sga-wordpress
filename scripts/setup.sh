@@ -79,6 +79,7 @@ $WP post create --post_type=page --post_title='About' --post_name='about' --post
 $WP post create --post_type=page --post_title='Donate' --post_name='donate' --post_status=publish
 $WP post create --post_type=page --post_title='Surrender' --post_name='surrender' --post_status=publish
 $WP post create --post_type=page --post_title='Resources' --post_name='resources' --post_status=publish
+$WP post create --post_type=page --post_title='Events' --post_name='events' --post_status=publish
 
 # Set homepage to use front-page.html template (no static page needed)
 $WP option update show_on_front 'posts'

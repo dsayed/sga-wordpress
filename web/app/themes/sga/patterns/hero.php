@@ -6,9 +6,10 @@
  * Description: Full-width hero with headline, subheadline, and two CTAs.
  */
 ?>
-<!-- wp:cover {"dimRatio":60,"overlayColor":"contrast","isUserOverlayColor":true,"minHeight":90,"minHeightUnit":"vh","align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|80","bottom":"var:preset|spacing|80","left":"24px","right":"24px"}}}} -->
+<!-- wp:cover {"url":"/app/uploads/2026/02/hero-dog.jpg","id":29,"dimRatio":50,"overlayColor":"contrast","isUserOverlayColor":true,"minHeight":90,"minHeightUnit":"vh","align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|80","bottom":"var:preset|spacing|80","left":"24px","right":"24px"}}}} -->
 <div class="wp-block-cover alignfull" style="padding-top:var(--wp--preset--spacing--80);padding-right:24px;padding-bottom:var(--wp--preset--spacing--80);padding-left:24px;min-height:90vh">
-<span aria-hidden="true" class="wp-block-cover__background has-contrast-background-color has-background-dim-60 has-background-dim"></span>
+<span aria-hidden="true" class="wp-block-cover__background has-contrast-background-color has-background-dim-50 has-background-dim"></span>
+<img class="wp-block-cover__image-background wp-image-29" alt="Happy dog looking at camera" src="/app/uploads/2026/02/hero-dog.jpg" data-object-fit="cover"/>
 <div class="wp-block-cover__inner-container">
 
 <!-- wp:group {"layout":{"type":"constrained","contentSize":"800px"}} -->
